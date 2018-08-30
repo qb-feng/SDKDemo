@@ -5,6 +5,7 @@ using UnityEngine.UI;
  * 2018年8月30日14:43:57
  *  U3DTypeSDK类为聚合sdk U3DType 的调用类，目前除了U3DTypeSDK 支持的各个类型，还包含有 YaoSDK ，调用方法一样，只需要在菜单栏qSDK/Copy SDK/YaoLing 拷贝yaoling sdk的安卓资源进来即可
  * SDKManager是自己写的一个接入各大平台sdk的统一调用类，要出什么平台的包在菜单栏qSDK/Copy SDK/ 下点击对应平台的名字即可打包
+ * 
  * 注意：点击TypeSDK按钮 不可以出包，只是导入typesdk资源后，导出母包，给type聚合sdk调用
 */
 public class Main : MonoBehaviour
