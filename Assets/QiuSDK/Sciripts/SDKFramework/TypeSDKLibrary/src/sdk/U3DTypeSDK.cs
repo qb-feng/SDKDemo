@@ -540,8 +540,8 @@ public class U3DTypeSDK : Notify_Type_Common
         }
 
         //设置所有的数据
-        U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.USER_ID, HSGameEngine.GameEngine.Network.GameInstance.Game.CurrentSession.UserID);
-        U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.USER_NAME, HSGameEngine.GameEngine.Network.GameInstance.Game.CurrentSession.UserID);
+        U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.USER_ID, "userid");
+        U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.USER_NAME, "username");
         U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.ROLE_ID, roleData.roleId);
         U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.ROLE_NAME, roleData.roleName);
         U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.ROLE_LEVEL, roleData.roleLevel);
