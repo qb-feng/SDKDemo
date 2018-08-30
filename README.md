@@ -1,8 +1,9 @@
-介绍：
+2018年8月30日15:40:32 工程创建
+工程介绍：
 
 	SDKDemo游戏接入安卓联运渠道sdk的demo工程，目前已接入
-	聚合SDK：TypeSDK(http://www.typesdk.com/)
-	单独SDK:曜灵116SDK，UC,HW,OPPO 等	
+		聚合SDK：TypeSDK(http://www.typesdk.com/)
+		单独SDK:曜灵116SDK，UC,HW,OPPO 等	
 文件夹介绍：
 
 	1 SDKDemo\PingTaiPeiZhi\PlatSDK\ 下为各个sdk需要用到的资源文件，替换或者新增sdk时在这里添加
