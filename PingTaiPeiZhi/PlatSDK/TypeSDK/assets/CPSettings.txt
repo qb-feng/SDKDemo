@@ -1,0 +1,14 @@
+﻿{
+"app_id":"1106982551",
+"app_key":"YBIf3xMhhM9Sa9ad",
+"channel_id":"2",
+"channelName":"tencent",
+"check_update_url":"[http://[your.sdk.server]/[cp_id]/update]",
+"cp_id":"1002",
+"platform":"unity",
+"sdk_name":"YingYongBao",
+"sdk_request_and_support":"support_exit_window",
+"switchconfig_url":"http://118.25.216.210/getConfig/1002/2/config.txt",
+"qq_appid":"101407613",
+"wx_appid":"wx1d66a124bab129ed"
+}

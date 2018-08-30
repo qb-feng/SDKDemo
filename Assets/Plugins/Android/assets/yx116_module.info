@@ -1,0 +1,8 @@
+[
+  {"plugnName":"com.yx116.bridgedeep116.DKPAuth","type":"1"},
+  {"plugnName":"com.yx116.bridgedeep116.DKPLogin","type":"2"},
+  {"plugnName":"com.yx116.bridgedeep116.DKPPay","type":"3"},
+  {"plugnName":"com.yx116.bridgedeep116.DKPGetInfo","type":"4"},
+  {"plugnName":"com.yx116.bridgedeep116.DKPAppLife","type":"5"},
+  {"plugnName":"com.yx116.bridgedeep116.DKPOther","type":"6"}
+]
