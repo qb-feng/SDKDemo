@@ -1,6 +1,5 @@
-# 
-2018年8月30日14:56:54 新建项目
-介绍：SDKDemo游戏接入安卓联运渠道sdk的demo工程，目前已接入
+介绍：
+        SDKDemo游戏接入安卓联运渠道sdk的demo工程，目前已接入
 		聚合SDK：TypeSDK(http://www.typesdk.com/)
 		单独SDK:曜灵116SDK，UC,HW,OPPO 等
 
