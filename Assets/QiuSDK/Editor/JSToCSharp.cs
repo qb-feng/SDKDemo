@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 public class JStoC : EditorWindow
 {
-    [MenuItem("Tools/Convert selected JS file(s) to C#")]
+   // [MenuItem("Tools/Convert selected JS file(s) to C#")]
     static void ConvertJStoC()
     {
         UnityEngine.Object[] objects = Selection.GetFiltered(typeof(MonoScript), SelectionMode.Editable);

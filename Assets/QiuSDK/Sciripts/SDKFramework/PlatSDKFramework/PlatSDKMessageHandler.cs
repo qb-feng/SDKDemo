@@ -4,7 +4,7 @@ using System.Collections;
 /// <summary>
 /// 回调接收物体
 /// </summary>
-public class PlatSDKMessageHandler : MonoSingleton<PlatSDKMessageHandler>, ISDKMessageable
+public class PlatSDKMessageHandler :SDK.MonoSingleton<PlatSDKMessageHandler>, ISDKMessageable
 {
 
     private PlatSDKManagerBase currentSDKManager = null;//当前sdk管理器

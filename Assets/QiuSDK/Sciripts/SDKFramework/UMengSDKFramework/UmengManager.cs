@@ -12,7 +12,7 @@ using Umeng;
 /// <summary>
 /// 友盟的初始化方法
 /// </summary>
-public class UmengManager : MonoSingleton<UmengManager>
+public class UmengManager : SDK.MonoSingleton<UmengManager>
 {
 
     //    616682000@qq.com

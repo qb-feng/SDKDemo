@@ -45,72 +45,75 @@ using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.Xml;
 
-public class U3DTypeSDK : Notify_Type_Common
+namespace TypeSDK
 {
 
-    public enum U3DTypeSDKPlatName
+    public class U3DTypeSDK : Notify_Type_Common
     {
-        HW = 9,
-        OPPO = 10,
-        UC = 301,
-        YYB = 2,
+
+        public enum U3DTypeSDKPlatName
+        {
+            HW = 9,
+            OPPO = 10,
+            UC = 301,
+            YYB = 2,
+
+            /// <summary>
+            /// 曜灵 116 聚合 SDK 
+            /// </summary>
+            YaoLing = 116,
+        }
+
+
+        private static U3DTypeSDK _instance;
+        private static object syncRoot = new object();
+        private static GameObject _container;
+
+        private U3DTypeBaseData _userData = null;
+        //	public volatile U3DTypePlatformData		platformData; 
+        private Dictionary<TypeEventType, U3DTypeEventDelegate> _delegateDic;
+        private bool isInitSelf = false;
+        private TypeBonjour bonjour = new TypeBonjour();
+
+
+        #region 公有数据
+        /// <summary>
+        /// 游戏代码
+        /// </summary>
+        public string Cpid { get; private set; }
 
         /// <summary>
-        /// 曜灵 116 聚合 SDK 
+        /// 渠道代码+useridc = 唯一的用户名
         /// </summary>
-        YaoLing = 116,
-    }
+        public string Channelid { get; private set; }
+        /// <summary>
+        /// 渠道名字
+        /// </summary>
+        public string ChannelName { get; private set; }
 
+        /// <summary>
+        /// 用户登录会话标识 本次登录标识。并非必传，未作说明的情况下传空字符串
+        /// </summary>
+        public string Token { get; private set; }
 
-    private static U3DTypeSDK _instance;
-    private static object syncRoot = new object();
-    private static GameObject _container;
+        /// <summary>
+        /// 用户唯一标识	string	对应渠道的用户ID       客户端在SDK上传用户信息时，传入此三个字段。否则可能造成部分渠道无法支付
+        /// </summary>
+        public string Id { get; private set; }
+        /// <summary>
+        /// 用户在渠道的昵称	string	对应渠道的用户昵称       客户端在SDK上传用户信息时，传入此三个字段。否则可能造成部分渠道无法支付
+        /// </summary>
+        public string Nick { get; private set; }
 
-    private U3DTypeBaseData _userData = null;
-    //	public volatile U3DTypePlatformData		platformData; 
-    private Dictionary<TypeEventType, U3DTypeEventDelegate> _delegateDic;
-    private bool isInitSelf = false;
-    private TypeBonjour bonjour = new TypeBonjour();
+        /// <summary>
+        /// 当前用户id（服务器内部的用户id chanlid+id）
+        /// </summary>
+        public string UserId { get; private set; }
 
-
-    #region 公有数据
-    /// <summary>
-    /// 游戏代码
-    /// </summary>
-    public string Cpid { get; private set; }
-
-    /// <summary>
-    /// 渠道代码+useridc = 唯一的用户名
-    /// </summary>
-    public string Channelid { get; private set; }
-    /// <summary>
-    /// 渠道名字
-    /// </summary>
-    public string ChannelName { get; private set; }
-
-    /// <summary>
-    /// 用户登录会话标识 本次登录标识。并非必传，未作说明的情况下传空字符串
-    /// </summary>
-    public string Token { get; private set; }
-
-    /// <summary>
-    /// 用户唯一标识	string	对应渠道的用户ID       客户端在SDK上传用户信息时，传入此三个字段。否则可能造成部分渠道无法支付
-    /// </summary>
-    public string Id { get; private set; }
-    /// <summary>
-    /// 用户在渠道的昵称	string	对应渠道的用户昵称       客户端在SDK上传用户信息时，传入此三个字段。否则可能造成部分渠道无法支付
-    /// </summary>
-    public string Nick { get; private set; }
-
-    /// <summary>
-    /// 当前用户id（服务器内部的用户id chanlid+id）
-    /// </summary>
-    public string UserId { get; private set; }
-
-    /// <summary>
-    /// 当前用户的登陆验证id
-    /// </summary>
-    public string LoginSSoid { get; private set; }
+        /// <summary>
+        /// 当前用户的登陆验证id
+        /// </summary>
+        public string LoginSSoid { get; private set; }
 
 #if YaoLing
     /// <summary>
@@ -119,112 +122,93 @@ public class U3DTypeSDK : Notify_Type_Common
     public string UserName { get; private set; }
 #endif
 
-    /// <summary>
-    /// 设置登入回调数据
-    /// </summary>
-    public void SetLoginData(string id, string nick, string token, string userId)
-    {
-        if (!string.IsNullOrEmpty(id))
-            Id = id;
-
-        Nick = nick;
-
-        if (!string.IsNullOrEmpty(token))
-            Token = token;
-
-        UserId = userId;
-    }
-
-    /// <summary>
-    /// 更新玩家信息的时机
-    /// </summary>
-    public enum UpdatePlayerInfoType
-    {
         /// <summary>
-        /// 创建角色时机
+        /// 设置登入回调数据
         /// </summary>
-        createRole = 1,
-        /// <summary>
-        /// 角色升级时机
-        /// </summary>
-        levelUp = 2,
-        /// <summary>
-        /// 选定角色进入游戏，不能为空字符串
-        /// </summary>
-        enterGame = 3,
-    }
-
-    /// <summary>
-    /// 重置登录数据
-    /// </summary>
-    public void RefreshLoginData()
-    {
-        Token = null;
-        Id = null;
-        Nick = null;
-        UserId = null;
-        LoginSSoid = null;
-    }
-
-    #endregion
-
-
-    private U3DTypeSDK() : base() { }
-    //获得sdk 实例U3DTypeSDK
-    public static U3DTypeSDK Instance
-    {
-        get
+        public void SetLoginData(string id, string nick, string token, string userId)
         {
-            if (_instance == null)
+            if (!string.IsNullOrEmpty(id))
+                Id = id;
+
+            Nick = nick;
+
+            if (!string.IsNullOrEmpty(token))
+                Token = token;
+
+            UserId = userId;
+        }
+
+        /// <summary>
+        /// 更新玩家信息的时机
+        /// </summary>
+        public enum UpdatePlayerInfoType
+        {
+            /// <summary>
+            /// 创建角色时机
+            /// </summary>
+            createRole = 1,
+            /// <summary>
+            /// 角色升级时机
+            /// </summary>
+            levelUp = 2,
+            /// <summary>
+            /// 选定角色进入游戏，不能为空字符串
+            /// </summary>
+            enterGame = 3,
+        }
+
+        /// <summary>
+        /// 重置登录数据
+        /// </summary>
+        public void RefreshLoginData()
+        {
+            Token = null;
+            Id = null;
+            Nick = null;
+            UserId = null;
+            LoginSSoid = null;
+        }
+
+        #endregion
+
+
+        private U3DTypeSDK() : base() { }
+        //获得sdk 实例U3DTypeSDK
+        public static U3DTypeSDK Instance
+        {
+            get
             {
-                _instance = (U3DTypeSDK)FindObjectOfType(typeof(U3DTypeSDK));
                 if (_instance == null)
                 {
-                    GameObject go = new GameObject("TypeSDK");
-                    _instance = go.AddComponent<U3DTypeSDK>();
-
-                    DontDestroyOnLoad(_instance);
-
-                    var singletonRootGo = GameObject.Find("UI Root (2D)");
-                    if (singletonRootGo != null)
+                    _instance = (U3DTypeSDK)FindObjectOfType(typeof(U3DTypeSDK));
+                    if (_instance == null)
                     {
-                        go.transform.SetParent(singletonRootGo.transform);
+                        GameObject go = new GameObject("TypeSDK");
+                        _instance = go.AddComponent<U3DTypeSDK>();
+
+                        DontDestroyOnLoad(_instance);
+
+                        var singletonRootGo = GameObject.Find("UI Root (2D)");
+                        if (singletonRootGo != null)
+                        {
+                            go.transform.SetParent(singletonRootGo.transform);
+                        }
                     }
+                    _instance._delegateDic = new Dictionary<TypeEventType, U3DTypeEventDelegate>();
                 }
-                _instance._delegateDic = new Dictionary<TypeEventType, U3DTypeEventDelegate>();
+                return _instance;
             }
-            return _instance;
         }
-    }
 
-    //        //if (null == _instance)
-    //        //{
-    //        //    _container = new GameObject();
-    //        //    _container.name = "TypeSDK";
-    //        //    UnityEngine.Object.DontDestroyOnLoad(_container);
-    //        //    lock (syncRoot)
-    //        //    {
-    //        //        if (null == _instance)
-    //        //        {
-    //        //            _instance = _container.AddComponent(typeof(U3DTypeSDK)) as U3DTypeSDK;
-
-    //        //            _instance._delegateDic = new Dictionary<TypeEventType, U3DTypeEventDelegate>();
-    //        //        }
-    //        //    }
-    //        //}
-    //        //return _instance;
-    //    }
-    //}
-
-    /// <summary>
-    /// 初始化(包含友盟初始化) - 参数：成功回调
-    /// </summary>
-    public void InitSDK(Action onComplete)
-    {
-        gameObject.name = "TypeSDK";
+        /// <summary>
+        /// 初始化(包含友盟初始化) - 参数：成功回调
+        /// </summary>
+        public void InitSDK(Action onComplete)
+        {
+            gameObject.name = "TypeSDK";
 
 #if YaoLing
-        #region 2018年8月17日14:18:09 qiubin添加 曜灵 116 聚合 SDK
+            #region 2018年8月17日14:18:09 qiubin添加 曜灵 116 聚合 SDK
         Channelid = ((int)U3DTypeSDKPlatName.YaoLing).ToString();
         Cpid = "yaolingcpid";
         ChannelName = U3DTypeSDKPlatName.YaoLing.ToString();
@@ -232,67 +216,67 @@ public class U3DTypeSDK : Notify_Type_Common
         //初始化友盟sdk
         UmengManager.Instance.Init(ChannelName);
         onComplete();
-        #endregion
+            #endregion
 #else
 
-        //监听回调
-        U3DTypeEventListener.Instance.onSDKInitComplete = (evtData) =>
-        {
-            foreach (var v in evtData.attMap())
+            //监听回调
+            U3DTypeEventListener.Instance.onSDKInitComplete = (evtData) =>
             {
-                Debug.LogWarning("初始化得到参数：key:" + v.Key + "Value:" + v.Value);
-            }
+                foreach (var v in evtData.attMap())
+                {
+                    Debug.LogWarning("初始化得到参数：key:" + v.Key + "Value:" + v.Value);
+                }
 
-            U3DTypeBaseData platformData = U3DTypeSDK.Instance.GetPlatformData();
-            Channelid = platformData.GetData(U3DTypeAttName.CHANNEL_ID);
-            Cpid = platformData.GetData(U3DTypeAttName.CP_ID);
-            try
-            {
-                ChannelName = ((U3DTypeSDKPlatName)int.Parse(Channelid)).ToString();
-            }
-            catch (Exception e)
-            {
-                Debug.LogError("平台参数获取错误：" + e.Message);
-                ChannelName = platformData.GetData("channelName");
-                if (string.IsNullOrEmpty(ChannelName))
-                    ChannelName = Channelid;
-            }
+                U3DTypeBaseData platformData = U3DTypeSDK.Instance.GetPlatformData();
+                Channelid = platformData.GetData(U3DTypeAttName.CHANNEL_ID);
+                Cpid = platformData.GetData(U3DTypeAttName.CP_ID);
+                try
+                {
+                    ChannelName = ((U3DTypeSDKPlatName)int.Parse(Channelid)).ToString();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError("平台参数获取错误：" + e.Message);
+                    ChannelName = platformData.GetData("channelName");
+                    if (string.IsNullOrEmpty(ChannelName))
+                        ChannelName = Channelid;
+                }
 
 
 
-            // Cpid = evtData.GetData("cp_id");//游戏代码
-            //Channelid = evtData.GetData("channelid");//渠道代码
-            Debug.LogWarning("初始化成功！！！！当前得到的游戏id为：" + Cpid + "        |渠道id为：" + Channelid);
-            //初始化友盟sdk
-            UmengManager.Instance.Init(ChannelName);
-            onComplete();
-        };
+                // Cpid = evtData.GetData("cp_id");//游戏代码
+                //Channelid = evtData.GetData("channelid");//渠道代码
+                Debug.LogWarning("初始化成功！！！！当前得到的游戏id为：" + Cpid + "        |渠道id为：" + Channelid);
+                //初始化友盟sdk
+                UmengManager.Instance.Init(ChannelName);
+                onComplete();
+            };
 
-        U3DTypeEventListener.Instance.InitSelf();
-        Instance.selfInit();
+            U3DTypeEventListener.Instance.InitSelf();
+            Instance.selfInit();
 #endif
-    }
+        }
 
-    public U3DTypeBaseData GetUserData()
-    {
-        if (null == _userData)
-            _userData = bonjour.GetUserData();
+        public U3DTypeBaseData GetUserData()
+        {
+            if (null == _userData)
+                _userData = bonjour.GetUserData();
 
-        return _userData;
-    }
-    public U3DTypeBaseData GetPlatformData()
-    {
-        return bonjour.GetPlatformData();
-    }
-    //显示登录平台的方法
-    public void Login(Action onComplete)
-    {
-        //重置数据
-        RefreshLoginData();
+            return _userData;
+        }
+        public U3DTypeBaseData GetPlatformData()
+        {
+            return bonjour.GetPlatformData();
+        }
+        //显示登录平台的方法
+        public void Login(Action onComplete)
+        {
+            //重置数据
+            RefreshLoginData();
 
 
 #if YaoLing
-        #region 2018年8月17日14:18:09 qiubin添加 曜灵 116 聚合 SDK
+            #region 2018年8月17日14:18:09 qiubin添加 曜灵 116 聚合 SDK
         //监听回调
         Debug.LogWarning("调用曜灵116sdk 登入！");
         YaoLingSDKCallBackManager.Instance.onSDKLoginComplete = (evtData) =>
@@ -314,100 +298,100 @@ public class U3DTypeSDK : Notify_Type_Common
 
         };
         YaoLingSDKCallBackManager.Instance.CallAndroidFunc(YaoLingSDKCallBackManager.YaoLinAndroidSDKNameType.StartSDKLogin);
-        #endregion
+            #endregion
 #else
 
-        //监听回调
-        U3DTypeEventListener.Instance.onSDKLoginComplete = (evtData) =>
-        {
-            Debug.LogWarning("登陆回调参数如下：");
-            foreach (var v in evtData.attMap())
+            //监听回调
+            U3DTypeEventListener.Instance.onSDKLoginComplete = (evtData) =>
             {
-                Debug.LogWarning(v.Key + "  " + v.Value);
-            }
-            //Token = evtData.GetData("user_token");
-            //Debug.LogWarning("登录成功！收到登录回调token：" + Token);
-            if (Token == null)
-            {
-                U3DTypeBaseData userData = U3DTypeSDK.Instance.GetUserData();
-                UserId = userData.GetData(U3DTypeAttName.USER_ID);
-                Token = userData.GetData(U3DTypeAttName.USER_TOKEN);
-
-                Debug.LogWarning("重新获取到的token为：" + Token + "serid为：" + UserId);
+                Debug.LogWarning("登陆回调参数如下：");
+                foreach (var v in evtData.attMap())
+                {
+                    Debug.LogWarning(v.Key + "  " + v.Value);
+                }
+                //Token = evtData.GetData("user_token");
+                //Debug.LogWarning("登录成功！收到登录回调token：" + Token);
                 if (Token == null)
                 {
-                    Token = evtData.GetData("user_token");
-                    Debug.LogWarning("登录成功！收到登录回调token：" + Token);
+                    U3DTypeBaseData userData = U3DTypeSDK.Instance.GetUserData();
+                    UserId = userData.GetData(U3DTypeAttName.USER_ID);
+                    Token = userData.GetData(U3DTypeAttName.USER_TOKEN);
+
+                    Debug.LogWarning("重新获取到的token为：" + Token + "serid为：" + UserId);
+                    if (Token == null)
+                    {
+                        Token = evtData.GetData("user_token");
+                        Debug.LogWarning("登录成功！收到登录回调token：" + Token);
+                    }
+
                 }
+                //判空处理（保证数据不为null，服务器不会解析出错）
+                if (Token == null)
+                    Token = "";
+                if (UserId == null)
+                    UserId = "";
 
+                onComplete();
+            };
+
+            //if has not self init return and wait receive update event
+            if (!selfInit())
+            {
+                Debug.Log("has not self init");
+                return;
             }
-            //判空处理（保证数据不为null，服务器不会解析出错）
-            if (Token == null)
-                Token = "";
-            if (UserId == null)
-                UserId = "";
-
-            onComplete();
-        };
-
-        //if has not self init return and wait receive update event
-        if (!selfInit())
-        {
-            Debug.Log("has not self init");
-            return;
-        }
-        Debug.Log("do login ");
-        bonjour.ShowLogin();
+            Debug.Log("do login ");
+            bonjour.ShowLogin();
 
 #endif
 
 
-    }
-    //腾讯登录方式，loginType:1为QQ登录，2为微信登录
-    public void Login(string loginType)
-    {
-        if (!selfInit())
-        {
-            Debug.Log("has not self init");
-            return;
         }
-        Debug.Log("do YSDK login ");
-        bonjour.ShowLogin();
-        Debug.Log("do YSDK login finisth");
-    }
-    //登出平台
-    public void Logout()
-    {
-        //		selfInit ();
-        bonjour.ShowLogout();
-    }
+        //腾讯登录方式，loginType:1为QQ登录，2为微信登录
+        public void Login(string loginType)
+        {
+            if (!selfInit())
+            {
+                Debug.Log("has not self init");
+                return;
+            }
+            Debug.Log("do YSDK login ");
+            bonjour.ShowLogin();
+            Debug.Log("do YSDK login finisth");
+        }
+        //登出平台
+        public void Logout()
+        {
+            //		selfInit ();
+            bonjour.ShowLogout();
+        }
 
-    public int LoginState()
-    {
-        return bonjour.LoginState();
+        public int LoginState()
+        {
+            return bonjour.LoginState();
 
-    }
+        }
 
-    /**
-     * eg:
-     * 			payData.SetData(U3DTypeAttName.REAL_PRICE,"100");
-            payData.SetData(U3DTypeAttName.ITEM_NAME,"sk bi");
-            payData.SetData(U3DTypeAttName.ITEM_DESC,"desc");
-            payData.SetData(U3DTypeAttName.ITEM_COUNT,"1");
-            payData.SetData(U3DTypeAttName.ITEM_SEVER_ID,"id");
-            payData.SetData(U3DTypeAttName.SEVER_ID,"1");
-            payData.SetData(U3DTypeAttName.EXTRA,"extra");
+        /**
+         * eg:
+         * 			payData.SetData(U3DTypeAttName.REAL_PRICE,"100");
+                payData.SetData(U3DTypeAttName.ITEM_NAME,"sk bi");
+                payData.SetData(U3DTypeAttName.ITEM_DESC,"desc");
+                payData.SetData(U3DTypeAttName.ITEM_COUNT,"1");
+                payData.SetData(U3DTypeAttName.ITEM_SEVER_ID,"id");
+                payData.SetData(U3DTypeAttName.SEVER_ID,"1");
+                payData.SetData(U3DTypeAttName.EXTRA,"extra");
 			
-     * 支付函数
-     * @param _in_pay pay object 支付对象的结构体 若至少传入 一个 价格 
-     * 参数1：商品信息  参数2：订单id（由服务器生成）
-     * @return bill number
-     */
-    public string PayItem(SDKData.PayOrderData orderData, string orderId)
-    {
+         * 支付函数
+         * @param _in_pay pay object 支付对象的结构体 若至少传入 一个 价格 
+         * 参数1：商品信息  参数2：订单id（由服务器生成）
+         * @return bill number
+         */
+        public string PayItem(SDKData.PayOrderData orderData, string orderId)
+        {
 #if YaoLing
         Debug.LogWarning("调用曜灵116sdk 支付！");
-        #region 2018年8月17日14:18:09 qiubin添加 曜灵 116 聚合 SDK
+            #region 2018年8月17日14:18:09 qiubin添加 曜灵 116 聚合 SDK
         var payModel = new YaoLingSDKCallBackManager.YX116PayParamsModel()
         {
             userid = Id,
@@ -426,91 +410,91 @@ public class U3DTypeSDK : Notify_Type_Common
         YaoLingSDKCallBackManager.Instance.CallAndroidFunc(YaoLingSDKCallBackManager.YaoLinAndroidSDKNameType.StartSDKPay, LitJson.JsonMapper.ToJson(payModel));
 
         return null;
-        #endregion
+            #endregion
 #else
 
-        //创建一个订单信息
-        U3DTypeBaseData payData = new U3DTypeBaseData();
-        //用户ID，渠道返回，没有填空字符串
-        payData.SetData(U3DTypeAttName.USER_ID, Id);
-        //用户token，登录验签完成后由游戏服务端返回，没有填空字符串
-        payData.SetData(U3DTypeAttName.USER_TOKEN, Token);
-        //商品支付价格（单位：分）
-        payData.SetData(U3DTypeAttName.REAL_PRICE, (orderData.amount * 100).ToString());
-        //商品名称，不要出现空格和特殊字符。
-        payData.SetData(U3DTypeAttName.ITEM_NAME, orderData.productName);
-        //商品数量
-        payData.SetData(U3DTypeAttName.ITEM_COUNT, orderData.productCount);
-        //所在服务器id（如果没有填“0”）
-        payData.SetData(U3DTypeAttName.SERVER_ID, "0");
-        //所在服务器名字（如果没有填“server_name”）
-        payData.SetData(U3DTypeAttName.SERVER_NAME, "server_name");
-        //所在大区id（如果没有填“0”），注意应用宝要求：账户分区ID_角色ID。每个应用都有一个分区ID为1的默认分区，分区可以在cpay.qq.com/mpay上自助配置。如果应用选择支持角色，则角色ID接在分区ID号后用"_"连接，角色ID需要进行urlencode。
-        payData.SetData(U3DTypeAttName.ZONE_ID, orderData.zoneID.ToString());
-        //所在大区名字（如果没有填“server_name”）
-        payData.SetData(U3DTypeAttName.ZONE_NAME, orderData.zoneName);
-        //TODO 内部订单号（必须填写，并保证多区情况下，订单号唯一）
-        //string orderId = string.Format("{0}{1}{2}", Channelid, orderData.productId, SDKData.PayOrderData.GetCurrentTimeMiss());
-        payData.SetData(U3DTypeAttName.BILL_NUMBER, orderId);
-        //商品id（需和TypeSDK Server商品列表保持一致）
-        payData.SetData(U3DTypeAttName.ITEM_SERVER_ID, orderData.productId);
-        //传递的额外参数（建议传入需要用来做订单标识的信息）
-        payData.SetData(U3DTypeAttName.EXTRA, orderData.roleID + "|" + orderData.zoneID);
-        //商品描述，不要出现空格和特殊字符串
-        payData.SetData(U3DTypeAttName.ITEM_DESC, orderData.productDesc);
-        //玩家在游戏中的角色ID
-        payData.SetData(U3DTypeAttName.ROLE_ID, orderData.roleID.ToString());
-        //玩家在游戏中的角色名字
-        payData.SetData(U3DTypeAttName.ROLE_NAME, orderData.roleName);
+            //创建一个订单信息
+            U3DTypeBaseData payData = new U3DTypeBaseData();
+            //用户ID，渠道返回，没有填空字符串
+            payData.SetData(U3DTypeAttName.USER_ID, Id);
+            //用户token，登录验签完成后由游戏服务端返回，没有填空字符串
+            payData.SetData(U3DTypeAttName.USER_TOKEN, Token);
+            //商品支付价格（单位：分）
+            payData.SetData(U3DTypeAttName.REAL_PRICE, (orderData.amount * 100).ToString());
+            //商品名称，不要出现空格和特殊字符。
+            payData.SetData(U3DTypeAttName.ITEM_NAME, orderData.productName);
+            //商品数量
+            payData.SetData(U3DTypeAttName.ITEM_COUNT, orderData.productCount);
+            //所在服务器id（如果没有填“0”）
+            payData.SetData(U3DTypeAttName.SERVER_ID, "0");
+            //所在服务器名字（如果没有填“server_name”）
+            payData.SetData(U3DTypeAttName.SERVER_NAME, "server_name");
+            //所在大区id（如果没有填“0”），注意应用宝要求：账户分区ID_角色ID。每个应用都有一个分区ID为1的默认分区，分区可以在cpay.qq.com/mpay上自助配置。如果应用选择支持角色，则角色ID接在分区ID号后用"_"连接，角色ID需要进行urlencode。
+            payData.SetData(U3DTypeAttName.ZONE_ID, orderData.zoneID.ToString());
+            //所在大区名字（如果没有填“server_name”）
+            payData.SetData(U3DTypeAttName.ZONE_NAME, orderData.zoneName);
+            //TODO 内部订单号（必须填写，并保证多区情况下，订单号唯一）
+            //string orderId = string.Format("{0}{1}{2}", Channelid, orderData.productId, SDKData.PayOrderData.GetCurrentTimeMiss());
+            payData.SetData(U3DTypeAttName.BILL_NUMBER, orderId);
+            //商品id（需和TypeSDK Server商品列表保持一致）
+            payData.SetData(U3DTypeAttName.ITEM_SERVER_ID, orderData.productId);
+            //传递的额外参数（建议传入需要用来做订单标识的信息）
+            payData.SetData(U3DTypeAttName.EXTRA, orderData.roleID + "|" + orderData.zoneID);
+            //商品描述，不要出现空格和特殊字符串
+            payData.SetData(U3DTypeAttName.ITEM_DESC, orderData.productDesc);
+            //玩家在游戏中的角色ID
+            payData.SetData(U3DTypeAttName.ROLE_ID, orderData.roleID.ToString());
+            //玩家在游戏中的角色名字
+            payData.SetData(U3DTypeAttName.ROLE_NAME, orderData.roleName);
 
-        //		selfInit ();
-        Debug.Log("U3D_Type sdk buy item");
-        string billNo = bonjour.PayItem(payData);
-        return billNo;
+            //		selfInit ();
+            Debug.Log("U3D_Type sdk buy item");
+            string billNo = bonjour.PayItem(payData);
+            return billNo;
 #endif
-    }
-    //显示用户中心
-    public void ShowPersonCenter()
-    {
-        //		selfInit ();
-
-        bonjour.ShowPersonCenter();
-    }
-    //隐藏用户中心（若平台sdk存在该方法）
-    public void HidePersonCenter()
-    {
-        //		selfInit ();
-        bonjour.HidePersonCenter();
-    }
-    public void ShowToolBar()
-    {
-        bonjour.ShowToolBar();
-    }
-    public void HideToolbar()
-    {
-        bonjour.HideToolBar();
-    }
-
-    /// <summary>
-    /// 上传玩家信息到sdk服务器  参数1：玩家参数 参数2：上传时机
-    /// </summary>
-    public void UpdatePlayerInfo(SDKData.RoleData roleData, UpdatePlayerInfoType updateType)
-    {
-        if (UpdatePlayerInfoType.levelUp == updateType)
-        {
-            Umeng.GA.SetUserLevel(int.Parse(roleData.roleLevel));//统计玩家等级
         }
-        else if (UpdatePlayerInfoType.enterGame == updateType)
+        //显示用户中心
+        public void ShowPersonCenter()
         {
-            Umeng.Analytics.Event("RoleLoginCount");//统计登陆次数
-        }
-        else if (UpdatePlayerInfoType.createRole == updateType)
-        {
+            //		selfInit ();
 
+            bonjour.ShowPersonCenter();
         }
+        //隐藏用户中心（若平台sdk存在该方法）
+        public void HidePersonCenter()
+        {
+            //		selfInit ();
+            bonjour.HidePersonCenter();
+        }
+        public void ShowToolBar()
+        {
+            bonjour.ShowToolBar();
+        }
+        public void HideToolbar()
+        {
+            bonjour.HideToolBar();
+        }
+
+        /// <summary>
+        /// 上传玩家信息到sdk服务器  参数1：玩家参数 参数2：上传时机
+        /// </summary>
+        public void UpdatePlayerInfo(SDKData.RoleData roleData, UpdatePlayerInfoType updateType)
+        {
+            if (UpdatePlayerInfoType.levelUp == updateType)
+            {
+                Umeng.GA.SetUserLevel(int.Parse(roleData.roleLevel));//统计玩家等级
+            }
+            else if (UpdatePlayerInfoType.enterGame == updateType)
+            {
+                Umeng.Analytics.Event("RoleLoginCount");//统计登陆次数
+            }
+            else if (UpdatePlayerInfoType.createRole == updateType)
+            {
+
+            }
 
 #if YaoLing
-        #region 2018年8月17日14:18:09 qiubin添加 曜灵 116 聚合 SDK
+            #region 2018年8月17日14:18:09 qiubin添加 曜灵 116 聚合 SDK
         Debug.LogWarning("调用曜灵116sdk 保存信息！");
         long roleCTime;
         if (!long.TryParse(roleData.createTime, out roleCTime))
@@ -528,204 +512,205 @@ public class U3DTypeSDK : Notify_Type_Common
           zoneName = roleData.realmName,
       };
         YaoLingSDKCallBackManager.Instance.CallAndroidFunc(YaoLingSDKCallBackManager.YaoLinAndroidSDKNameType.StartSDKSaveRoleInfo, LitJson.JsonMapper.ToJson(roleModel));
-        #endregion
+            #endregion
 
 #else
-        //TODO 解决时间戳过大传入java中转换成整形失败的问题
-        if (roleData.createTime.Length >= 10)
-        {
-            long createTime = long.Parse(roleData.createTime);
-            int intTime = (int)(createTime / 10);
-            roleData.createTime = intTime.ToString();
-        }
+            //TODO 解决时间戳过大传入java中转换成整形失败的问题
+            if (roleData.createTime.Length >= 10)
+            {
+                long createTime = long.Parse(roleData.createTime);
+                int intTime = (int)(createTime / 10);
+                roleData.createTime = intTime.ToString();
+            }
 
-        //设置所有的数据
-        U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.USER_ID, "userid");
-        U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.USER_NAME, "username");
-        U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.ROLE_ID, roleData.roleId);
-        U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.ROLE_NAME, roleData.roleName);
-        U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.ROLE_LEVEL, roleData.roleLevel);
+            //设置所有的数据
+            U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.USER_ID, "userid");
+            U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.USER_NAME, "username");
+            U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.ROLE_ID, roleData.roleId);
+            U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.ROLE_NAME, roleData.roleName);
+            U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.ROLE_LEVEL, roleData.roleLevel);
 
-        U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.ZONE_ID, roleData.realmId);
-        U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.ZONE_NAME, roleData.realmName);
-        U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.SERVER_ID, roleData.realmId);
-        U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.SERVER_NAME, roleData.realmName);
-        U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.USER_TOKEN, Token);
+            U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.ZONE_ID, roleData.realmId);
+            U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.ZONE_NAME, roleData.realmName);
+            U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.SERVER_ID, roleData.realmId);
+            U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.SERVER_NAME, roleData.realmName);
+            U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.USER_TOKEN, Token);
 
-        U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.USER_HEAD_ID, "");
-        U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.USER_HEAD_URL, "");
-        U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.VIP_LEVEL, "0");
-        U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.PARTY_NAME, "");
-        U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.ROLE_CREATE_TIME, roleData.createTime);
+            U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.USER_HEAD_ID, "");
+            U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.USER_HEAD_URL, "");
+            U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.VIP_LEVEL, "0");
+            U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.PARTY_NAME, "");
+            U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.ROLE_CREATE_TIME, roleData.createTime);
 
-        U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.ROLE_LEVELUP_TIME, "0");//角色升级时间（单位/秒）
-        U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.ROLE_TYPE, updateType.ToString());//角色统计信息类型即调用时机，（createRole:创建角色，levelUp:角色升级，enterGame:选定角色进入游戏，不能为空字符串）
-        U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.SAVED_BALANCE, "0");
+            U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.ROLE_LEVELUP_TIME, "0");//角色升级时间（单位/秒）
+            U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.ROLE_TYPE, updateType.ToString());//角色统计信息类型即调用时机，（createRole:创建角色，levelUp:角色升级，enterGame:选定角色进入游戏，不能为空字符串）
+            U3DTypeSDK.Instance.GetUserData().SetData(U3DTypeAttName.SAVED_BALANCE, "0");
 
-        U3DTypeBaseData cacheUser = GetUserData();
-        Debug.Log("send player info : " + cacheUser.DataToString());
-        bonjour.SetPlayerInfo(cacheUser);
+            U3DTypeBaseData cacheUser = GetUserData();
+            Debug.Log("send player info : " + cacheUser.DataToString());
+            bonjour.SetPlayerInfo(cacheUser);
 #endif
-    }
-    public void ShowShare(U3DTypeBaseData _in_data)
-    {
-        bonjour.ShowShare(_in_data);
-    }
-    public void CallCopyClipboard(U3DTypeBaseData _in_data)
-    {
-        bonjour.CopyClipboard(_in_data);
-    }
-    public bool IsHasRequest(String requestType)
-    {
+        }
+        public void ShowShare(U3DTypeBaseData _in_data)
+        {
+            bonjour.ShowShare(_in_data);
+        }
+        public void CallCopyClipboard(U3DTypeBaseData _in_data)
+        {
+            bonjour.CopyClipboard(_in_data);
+        }
+        public bool IsHasRequest(String requestType)
+        {
 #if YaoLing
         return false;
 #endif
-        return bonjour.IsHasRequest(requestType);
-    }
-    public void Destory()
-    {
-        bonjour.Destory();
-    }
-    public void ExitGame()
-    {
+            return bonjour.IsHasRequest(requestType);
+        }
+        public void Destory()
+        {
+            bonjour.Destory();
+        }
+        public void ExitGame()
+        {
 #if YaoLing
         Debug.LogWarning("调用曜灵116sdk 退出！");
         YaoLingSDKCallBackManager.Instance.CallAndroidFunc(YaoLingSDKCallBackManager.YaoLinAndroidSDKNameType.ExitGame);
 #else
-        bonjour.ExitGame();
+            bonjour.ExitGame();
 #endif
-        Umeng.GA.ProfileSignOff();//账号登出时需调用此接口，调用之后不再发送账号相关内容。
+            Umeng.GA.ProfileSignOff();//账号登出时需调用此接口，调用之后不再发送账号相关内容。
 
-    }
-    public void DoAnyFunction(string _func_name, U3DTypeBaseData _in_data)
-    {
-        bonjour.DoAnyFunction(_func_name, _in_data);
-    }
-    public string DoPhoneInfo()
-    {
-        return bonjour.DoPhoneInfo();
-    }
-    public void AddLocalPush(U3DTypeBaseData _pushData)
-    {
-        Debug.Log("AddLocalPush in u3dType sdk : " + _pushData.DataToString());
-
-        bonjour.AddLocalPush(_pushData);
-    }
-    public void RemoveLocalPush(string pushid)
-    {
-        bonjour.RemoveLocalPush(pushid);
-    }
-    public void RemoveAllLocalPush()
-    {
-        bonjour.RemoveAllLocalPush();
-    }
-    public void GetUserFriends()
-    {
-        bonjour.GetUserFriends();
-    }
-    /////////////////private functions ///////
-    private bool selfInit()
-    {
-        if (isInitSelf) return true;
-        isInitSelf = true;
-
-        //		AnalyXMLData();
-
-        bonjour.initSDK();
-        return false;
-    }
-
-    /**
-    private void AnalyXMLData()
-    {
-        XmlDocument xmlDoc= TypeSDKTool.XmlTool.readXMLBelowAsster(U3DTypeDefine.Type_SDK_CONFIG_PATH);
-        U3DTypeBaseData platformData = GetPlatformData();
-        if(xmlDoc!=null)
+        }
+        public void DoAnyFunction(string _func_name, U3DTypeBaseData _in_data)
         {
-            XmlNodeList nodeList = xmlDoc.SelectSingleNode("data").ChildNodes;
-            foreach(XmlElement sdk in nodeList)
+            bonjour.DoAnyFunction(_func_name, _in_data);
+        }
+        public string DoPhoneInfo()
+        {
+            return bonjour.DoPhoneInfo();
+        }
+        public void AddLocalPush(U3DTypeBaseData _pushData)
+        {
+            Debug.Log("AddLocalPush in u3dType sdk : " + _pushData.DataToString());
+
+            bonjour.AddLocalPush(_pushData);
+        }
+        public void RemoveLocalPush(string pushid)
+        {
+            bonjour.RemoveLocalPush(pushid);
+        }
+        public void RemoveAllLocalPush()
+        {
+            bonjour.RemoveAllLocalPush();
+        }
+        public void GetUserFriends()
+        {
+            bonjour.GetUserFriends();
+        }
+        /////////////////private functions ///////
+        private bool selfInit()
+        {
+            if (isInitSelf) return true;
+            isInitSelf = true;
+
+            //		AnalyXMLData();
+
+            bonjour.initSDK();
+            return false;
+        }
+
+        /**
+        private void AnalyXMLData()
+        {
+            XmlDocument xmlDoc= TypeSDKTool.XmlTool.readXMLBelowAsster(U3DTypeDefine.Type_SDK_CONFIG_PATH);
+            U3DTypeBaseData platformData = GetPlatformData();
+            if(xmlDoc!=null)
             {
-                foreach(XmlElement sdkEle in sdk.ChildNodes)
+                XmlNodeList nodeList = xmlDoc.SelectSingleNode("data").ChildNodes;
+                foreach(XmlElement sdk in nodeList)
                 {
-                    //					Debug.Log("\n"+ sdkEle.Name+" : "+sdkEle.InnerText+"<<");
-                    ;
-                    if(null!=platformData.GetType().GetField(sdkEle.Name)
-                       )
+                    foreach(XmlElement sdkEle in sdk.ChildNodes)
                     {
-                        Debug.Log("change element name: "+ sdkEle.Name);
-                        if(null!=platformData.GetType().GetField(sdkEle.Name))
+                        //					Debug.Log("\n"+ sdkEle.Name+" : "+sdkEle.InnerText+"<<");
+                        ;
+                        if(null!=platformData.GetType().GetField(sdkEle.Name)
+                           )
                         {
+                            Debug.Log("change element name: "+ sdkEle.Name);
+                            if(null!=platformData.GetType().GetField(sdkEle.Name))
+                            {
+                            }
+                            else 
+                            {
+                                platformData.GetType().GetField(sdkEle.Name).SetValue(platformData,sdkEle.InnerText);
+                            }
+    //						Debug.Log("\n"+ sdkEle.Name + ":--:"+
+    //						          platformData.GetType().GetField(sdkEle.Name).GetValue(platformData).ToString()
+    //						          );
                         }
-                        else 
-                        {
-                            platformData.GetType().GetField(sdkEle.Name).SetValue(platformData,sdkEle.InnerText);
-                        }
-//						Debug.Log("\n"+ sdkEle.Name + ":--:"+
-//						          platformData.GetType().GetField(sdkEle.Name).GetValue(platformData).ToString()
-//						          );
                     }
                 }
             }
         }
-    }
-*/
+    */
 
-    public void AddEventDelegate(TypeEventType _in_type, U3DTypeEventDelegate _in_delegate)
-    {
-
-        if (!_delegateDic.ContainsKey(_in_type))
+        public void AddEventDelegate(TypeEventType _in_type, U3DTypeEventDelegate _in_delegate)
         {
-            _delegateDic.Add(_in_type, _in_delegate);
-            return;
-        }
-        else
-        {
-            U3DTypeEventDelegate cacheDelegate = _delegateDic[_in_type];
-            cacheDelegate += _in_delegate;
-        }
-        Debug.Log("success add degelet ");
-    }
-    public void RemoveEventDelegate(TypeEventType _in_type)
-    {
-        if (_delegateDic.ContainsKey(_in_type))
-        {
-            _delegateDic.Remove(_in_type);
-        }
-    }
 
-
-    public void SendEvent(TypeEventType _in_type, U3DTypeBaseData _in_data)
-    {
-
-        U3DTypeEvent evt = new U3DTypeEvent(_in_type, _in_data);
-
-        if (null != _in_data)
-            Debug.Log(">>>>send event<<<<< type " + _in_type + "data" + _in_data.DataToString());
-        else
-            Debug.Log(">>>>send event<<<<< type " + _in_type + "null data");
-
-
-        Debug.Log("delegate dic start");
-        if (_delegateDic.ContainsKey(_in_type))
-        {
-            if (_delegateDic[_in_type] != null)
+            if (!_delegateDic.ContainsKey(_in_type))
             {
-                Debug.Log("find delegate " + _delegateDic[_in_type].ToString());
-                U3DTypeEventDelegate _delegate = _delegateDic[_in_type];
-                _delegate(evt);
-                //				_delegateDic[_in_type](evt);
+                _delegateDic.Add(_in_type, _in_delegate);
+                return;
+            }
+            else
+            {
+                U3DTypeEventDelegate cacheDelegate = _delegateDic[_in_type];
+                cacheDelegate += _in_delegate;
+            }
+            Debug.Log("success add degelet ");
+        }
+        public void RemoveEventDelegate(TypeEventType _in_type)
+        {
+            if (_delegateDic.ContainsKey(_in_type))
+            {
+                _delegateDic.Remove(_in_type);
             }
         }
-        else
+
+
+        public void SendEvent(TypeEventType _in_type, U3DTypeBaseData _in_data)
         {
-            Debug.Log("dic didnot has key");
+
+            U3DTypeEvent evt = new U3DTypeEvent(_in_type, _in_data);
+
+            if (null != _in_data)
+                Debug.Log(">>>>send event<<<<< type " + _in_type + "data" + _in_data.DataToString());
+            else
+                Debug.Log(">>>>send event<<<<< type " + _in_type + "null data");
+
+
+            Debug.Log("delegate dic start");
+            if (_delegateDic.ContainsKey(_in_type))
+            {
+                if (_delegateDic[_in_type] != null)
+                {
+                    Debug.Log("find delegate " + _delegateDic[_in_type].ToString());
+                    U3DTypeEventDelegate _delegate = _delegateDic[_in_type];
+                    _delegate(evt);
+                    //				_delegateDic[_in_type](evt);
+                }
+            }
+            else
+            {
+                Debug.Log("dic didnot has key");
+            }
+        }
+
+
+        public void SendEvent(TypeEventType _in_type)
+        {
+            SendEvent(_in_type, new U3DTypeBaseData());
         }
     }
 
-
-    public void SendEvent(TypeEventType _in_type)
-    {
-        SendEvent(_in_type, new U3DTypeBaseData());
-    }
 }
-
