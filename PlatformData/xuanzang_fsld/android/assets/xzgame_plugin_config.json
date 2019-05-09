@@ -1,8 +1,0 @@
-[
-  {"plugnName":"com.xzgame.bridgedeep425.DKPAuth","type":"1"},
-  {"plugnName":"com.xzgame.bridgedeep425.DKPLogin","type":"2"},
-  {"plugnName":"com.xzgame.bridgedeep425.DKPPay","type":"3"},
-  {"plugnName":"com.xzgame.bridgedeep425.DKPGetInfo","type":"4"},
-  {"plugnName":"com.xzgame.bridgedeep425.DKPAppLife","type":"5"},
-  {"plugnName":"com.xzgame.bridgedeep425.DKPOther","type":"6"}
-]
