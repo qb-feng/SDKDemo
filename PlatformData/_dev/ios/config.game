@@ -1,0 +1,20 @@
+{
+	"ScriptRawMode": false,
+	"ScriptRawPath": "_Scripts",
+	"ResRawMode": false,
+	"ResPath": "../ResCache/",
+	"UpdateResEnable": true,
+	"LuaErrReport": true,
+	"DitchID": "wxnemo",
+    "GameMode": "dev",
+	"RootUrlMode": "base",
+	"FPS" : 45,
+	"ShowFPS" : false,
+	"LogEnable": false,
+	"LogMode": 2,
+	"LogLevel": 2,
+	"DownloadPriority": 1000,
+	"BuglyEnable": true,
+	"VoiceEngineAppId": "1401244732",
+	"VoiceEngineAppKey": "b36899a35a447fc4abc82e9d71d7e8c7"
+}
