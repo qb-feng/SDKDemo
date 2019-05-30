@@ -117,7 +117,7 @@ public class EditorMonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Script Compile!");
+            //Debug.LogWarning("Script Compile!");
         }
     }
 

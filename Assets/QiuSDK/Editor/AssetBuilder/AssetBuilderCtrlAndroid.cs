@@ -283,7 +283,7 @@ namespace GameEditor.AssetBuidler
             PlayerSettings.Android.disableDepthAndStencilBuffers = false;
             PlayerSettings.Android.showActivityIndicatorOnLoading = AndroidShowActivityIndicatorOnLoading.DontShow;
             PlayerSettings.Android.minSdkVersion = AndroidSdkVersions.AndroidApiLevel16;
-            PlayerSettings.Android.targetDevice = AndroidTargetDevice.ARMv7;
+            PlayerSettings.Android.targetDevice = AndroidTargetDevice.FAT;
             PlayerSettings.Android.preferredInstallLocation = AndroidPreferredInstallLocation.Auto;
             PlayerSettings.Android.forceInternetPermission = true;
             PlayerSettings.Android.forceSDCardPermission = true;

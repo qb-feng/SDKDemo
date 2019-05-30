@@ -34,3 +34,11 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+#unity path
+Assets/Plugins/Android/
+Assets/Plugins/Android.*
+Assets/PlatformData/
+Assets/PlatformData.*
+Assets/StreamingAssets/SDKStreamingAssets/
+Assets/StreamingAssets/SDKStreamingAssets.*
