@@ -232,6 +232,10 @@ namespace GameEditor.AssetBuidler
                     {
                         splashCount++;
                         PlayerSettings.showUnitySplashScreen = false;
+
+#if UNITY_2017_1_OR_NEWER
+                        PlayerSettings.virtualRealitySplashScreen = tex2d;
+#endif
                     }
                     else
                         break;
@@ -336,8 +340,11 @@ namespace GameEditor.AssetBuidler
         /// </summary>
         private static void ReplaceAndroidManifestPushInfo(BuildPlatformConfig config, string platformName, AppGameConfig gameCfg)
         {
+            return;
             string tempContent = string.Empty;
             string filePath = Application.dataPath + config.pluginPath.Replace("Assets", "") + "AndroidManifest.xml";
+            if (!File.Exists(filePath))
+                return;
 
             string packConfigPath = string.Format(Directory.GetParent(UnityEngine.Application.dataPath) + "/PlatformData/{0}/android/default.pack", platformName);
             string packCfgJson = File.ReadAllText(packConfigPath);

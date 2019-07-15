@@ -14,6 +14,7 @@ namespace GameEditor.AssetBuidler
     {
         _dev = 0,
         xuanzang_fsld,
+        quicksdk,
     }
 
     public enum AppPackMode

@@ -1,0 +1,8 @@
+{
+	"AppVersion": 10000,
+	"mSdkTag": "quicksdk",
+	"GameName": "SDKDemo",
+	"LogEnable": true,
+	"DitchID": "quicksdk",
+	"Splash": 1	
+}
