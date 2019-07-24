@@ -7,7 +7,7 @@ namespace SDK
     ///     基类继承树中有MonoBehavrour类的单件实现，这种单件实现有利于减少对场景树的查询操作
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class MonoSingleton<T> : MonoBehaviour where T : Component
+    public class SDKMonoSingleton<T> : MonoBehaviour where T : Component
     {
         // 单件子类实例
         private static T _instance;

@@ -157,6 +157,11 @@ namespace SDKData
         public string gamename;
 
         /// <summary>
+        /// 额外字节数据
+        /// </summary>
+        public byte[] datas;
+
+        /// <summary>
         /// 获取当前时间长度为10的时间戳
         /// </summary>
         public static string GetCurrentTimeMiss()
@@ -241,13 +246,17 @@ namespace SDKData
     public enum SDKPlatName
     {
         None = 0,
+        //单独类sdk
         OPPO = 1,
         VIVO = 2,
         HW = 3,
         UC = 4,
         YYB = 5,
         YaoLing = 6,
+
+        //聚合类sdk
         TypeSDK = 1000,//typesdk
+        QuickSDK = 1001,
     }
     /// <summary>
     /// SDK 的通用数据
@@ -264,16 +273,17 @@ namespace SDKData
         {SDKPlatName.VIVO,"com.bwyx.hdtt.vivo"},
         {SDKPlatName.HW,"com.bwyx.hdtt.huawei"},
         {SDKPlatName.YaoLing,"com.yyty.hdtt.yaoling"},
-
-        
+        {SDKPlatName.YYB,"com.tencent.tmgp.djpml"},
+   
         {SDKPlatName.TypeSDK,"com.yyty.hdtt"},
     };
         #region 调用方法
-        public const string Login = "Login";
-        public const string Logout = "Logout";
-        public const string PayOrder = "PayOrder";
-        public const string ExitGame = "ExitGame";
-        public const string SaveRoleData = "SaveRoleData";
+        public const string StartSDKInit = "StartSDKInit";
+        public const string StartSDKLogin = "StartSDKLogin";
+        public const string StartSDKLogout = "StartSDKLogout";
+        public const string StartSDKPay = "StartSDKPay";
+        public const string StartExitGame = "StartExitGame";
+        public const string StartSDKSaveRoleInfo = "StartSDKSaveRoleInfo";
         #endregion
     }
 

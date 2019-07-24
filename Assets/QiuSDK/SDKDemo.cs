@@ -1,14 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-/*
- * 2018年8月30日14:43:57
- *  QuickSdkManager类为聚合sdk U3DType 的调用类，目前除了QuickSdkManager 支持的各个类型，还包含有 YaoSDK ，调用方法一样，只需要在菜单栏qSDK/Copy SDK/YaoLing 拷贝yaoling sdk的安卓资源进来即可
- * SDKManager是自己写的一个接入各大平台sdk的统一调用类，要出什么平台的包在菜单栏qSDK/Copy SDK/ 下点击对应平台的名字即可打包
- * 
- * 注意：点击TypeSDK按钮 不可以出包，只是导入typesdk资源后，导出母包，给type聚合sdk调用
-*/
-public class QuickSDKDemo : MonoBehaviour
+
+public class SDKDemo : MonoBehaviour
 {
     private Button InitButton;
     private Button LoginButton;
@@ -20,6 +14,8 @@ public class QuickSDKDemo : MonoBehaviour
     private Button SaveUMengCountButton;//保存友盟计算button
 
     private int i = 0;
+
+    private ISDKManager sdkmanager = null;
 
     // Use this for initialization
     void Start()
@@ -38,13 +34,18 @@ public class QuickSDKDemo : MonoBehaviour
         SetGameGoState(false);
         LoginButton.gameObject.SetActive(false);
 
+        sdkmanager = AloneSdk.AloneSDKManager.instance;
+        if (sdkmanager == null)
+        {
+            Debug.LogError("sdkmanager is null !");
+            return;
+        }
+
         InitButton.onClick.AddListener(() =>
         {
             SDKLogManager.DebugLog("正在初始化sdk！", SDKLogManager.DebugType.LogWarning);
 
-
-            //SDKManager.Instance.Init();
-            QuickSdkManager.Instance.InitSDK((result) =>
+            sdkmanager.InitSDK((result) =>
             {
                 if (result)
                 {
@@ -74,7 +75,7 @@ public class QuickSDKDemo : MonoBehaviour
         {
             SDKLogManager.DebugLog("正在登录！", SDKLogManager.DebugType.LogWarning);
             // SDKManager.Instance.Login((a) => { });
-            QuickSdkManager.Instance.Login((result) =>
+            sdkmanager.Login((result) =>
             {
                 if (result)
                 {
@@ -82,7 +83,7 @@ public class QuickSDKDemo : MonoBehaviour
                     LoginButton.gameObject.SetActive(false);
                     SetGameGoState(true);
                 }
-            });
+            }, Random.Range(0, 2) == 0 ? "qq" : "wx");
         });
 
         PayOrderButton.onClick.AddListener(() =>
@@ -91,7 +92,7 @@ public class QuickSDKDemo : MonoBehaviour
             var payOrderData = new SDKData.PayOrderData()
             {
                 orderId = SDKData.PayOrderData.GetCurrentTimeMiss(),
-                userid = QuickSdkManager.Instance.SDK_Id,
+                userid = sdkmanager.SDK_Id,
                 amount = 6,
                 productId = "10001",
                 productName = "钻石",
@@ -108,7 +109,7 @@ public class QuickSDKDemo : MonoBehaviour
                 gamename = N3DClient.GameConfig.GetClientConfig("GameName", "yyty"),
 
             };
-            QuickSdkManager.Instance.PayItem(payOrderData);
+            sdkmanager.PayItem(payOrderData);
             // SDKManager.Instance.PayOrder(payOrderData);
 
         });
@@ -129,16 +130,16 @@ public class QuickSDKDemo : MonoBehaviour
             };
 
             // SDKManager.Instance.SavePlayerInfo(roleData);
-            QuickSdkManager.Instance.UpdatePlayerInfo(roleData, SDKData.UpdatePlayerInfoType.levelUp);
-            QuickSdkManager.Instance.UpdatePlayerInfo(roleData, SDKData.UpdatePlayerInfoType.createRole);
-            QuickSdkManager.Instance.UpdatePlayerInfo(roleData, SDKData.UpdatePlayerInfoType.enterGame);
+            sdkmanager.UpdatePlayerInfo(roleData, SDKData.UpdatePlayerInfoType.levelUp);
+            sdkmanager.UpdatePlayerInfo(roleData, SDKData.UpdatePlayerInfoType.createRole);
+            sdkmanager.UpdatePlayerInfo(roleData, SDKData.UpdatePlayerInfoType.enterGame);
         });
 
         LogoutButton.onClick.AddListener(() =>
         {
             SDKLogManager.DebugLog("正在登出账号！！", SDKLogManager.DebugType.LogWarning);
             //SDKManager.Instance.Logout();
-            QuickSdkManager.Instance.Logout();
+            sdkmanager.Logout();
         });
 
         OnGameExitButton.onClick.AddListener(() =>
@@ -148,7 +149,7 @@ public class QuickSDKDemo : MonoBehaviour
             //{
             //    Debug.LogWarning("SDK 已经退出！");
             //});
-            QuickSdkManager.Instance.ExitGame();
+            sdkmanager.ExitGame();
 
 #if UNITY_EDITOR
             SetGameGoState(false);

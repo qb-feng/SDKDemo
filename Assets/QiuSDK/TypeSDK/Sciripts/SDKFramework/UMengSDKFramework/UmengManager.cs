@@ -12,7 +12,7 @@ using Umeng;
 /// <summary>
 /// 友盟的初始化方法
 /// </summary>
-public class UmengManager : SDK.MonoSingleton<UmengManager>
+public class UmengManager : SDK.SDKMonoSingleton<UmengManager>
 {
 
     //    616682000@qq.com
@@ -26,7 +26,7 @@ public class UmengManager : SDK.MonoSingleton<UmengManager>
     public void Init(string channeName = null)
     {
         Debug.LogWarning("正在初始化友盟统计！");
-        if (channeName != null && SDKManager.Instance.CurrentSDKPlatName != SDKPlatName.None)
+        if (channeName != null && SDKManager.Instance.CurrentSDKPlatName != SDKData.SDKPlatName.None)
         {
             //渠道名称 
             channeName = SDKManager.Instance.CurrentSDKPlatName.ToString();

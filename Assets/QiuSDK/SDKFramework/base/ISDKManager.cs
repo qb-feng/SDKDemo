@@ -1,30 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿
+using System;
 
 
 public interface ISDKManager
 {
-
-    //private static T _instance;
-
-    ////获得sdk 实例U3DTypeSDK
-    //public static T Instance
-    //{
-    //    get
-    //    {
-    //        if (_instance == null)
-    //        {
-    //            _instance = (T)UnityEngine.Object.FindObjectOfType(typeof(T));
-    //            if (_instance == null)
-    //            {
-    //                GameObject go = new GameObject(typeof(T).Name);
-    //                _instance = go.AddComponent<T>();
-    //                UnityEngine.Object.DontDestroyOnLoad(_instance);
-    //            }
-    //        }
-    //        return _instance;
-    //    }
-    //}
 
     #region 公有数据
 
@@ -43,6 +22,7 @@ public interface ISDKManager
     /// 当前用户的登陆验证id
     /// </summary>
     string LoginSSoid { get; set; }
+
     #endregion
 
     #region 第三方sdk的数据
@@ -102,7 +82,7 @@ public interface ISDKManager
 
 
     //显示登录平台的方法
-    void Login(Action<bool> onComplete);
+    void Login(Action<bool> onComplete, string arg = null);
 
 
     //登出平台
@@ -122,6 +102,20 @@ public interface ISDKManager
     /// </summary>
     void ExitGame();
 
+    /// <summary>
+    /// sdk是否有自带退出游戏框
+    /// </summary>
+    bool onGetChannelHasExitDialog();
+
+    /// <summary>
+    /// 获取SDK自己的参数，由各个sdk自己重写
+    /// </summary>
+    string GetSDKParamer(string key);
+
+    /// <summary>
+    /// 渠道类型
+    /// </summary>
+    SDKData.SDKPlatName getSDKPlatName();
     #endregion
 
 }

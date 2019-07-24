@@ -2,7 +2,7 @@
 using System.Collections;
 namespace TypeSDK
 {
-    public class U3DTypeEventListener : SDK.MonoSingleton<U3DTypeEventListener>
+    public class U3DTypeEventListener : SDK.SDKMonoSingleton<U3DTypeEventListener>
     {
         /// <summary>
         /// 初始化回调

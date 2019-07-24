@@ -144,7 +144,7 @@ public class QuickSdkManager : QuickSDKListener, ISDKManager
     }
 
     //显示登录平台的方法
-    public virtual void Login(Action<bool> onComplete)
+    public virtual void Login(Action<bool> onComplete, string args = null)
     {
         this.RefreshLoginData();
         onLoginComplete = onComplete;
@@ -464,5 +464,14 @@ public class QuickSdkManager : QuickSDKListener, ISDKManager
         SDKLogManager.DebugLog("sdk_c#_Log: title: " + title + ", message: " + message);
     }
 
+
+
+    public string GetSDKParamer(string key)
+    {
+        //throw new NotImplementedException();
+        return null;
+    }
+
+    public SDKData.SDKPlatName getSDKPlatName() { return SDKData.SDKPlatName.QuickSDK; }
 }
 
