@@ -226,20 +226,13 @@ namespace AloneSdk
         #endregion
 
         // Update is called once per frame
-        public virtual void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.F9))
-            {
-                var tempInfo2 = new quicksdk.UserInfo()
-                {
-                    token = "quicksdk_login_test_token",
-                    uid = "quicksdk_login_test_uid",
-                    userName = "qb_switch",
-                    errMsg = "",
-                };
-                LogoutCallBack("");
-            }
-        }
+        //public virtual void Update()
+        //{
+        //    if (Input.GetKeyDown(KeyCode.F9))
+        //    {
+        //        LogoutCallBack("SUCCESS");
+        //    }
+        //}
 
         #region 数据获取
         /// <summary>
