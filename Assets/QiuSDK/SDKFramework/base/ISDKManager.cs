@@ -78,7 +78,7 @@ public interface ISDKManager
     /// <summary>
     /// 初始化(友盟初始化) - 参数：初始化回调  注销登入回调
     /// </summary>
-    void InitSDK(Action<bool> onComplete, Action<bool> onSDKLogoutComplete);
+    void InitSDK(SDKData.InitArgModel initArgModel);
 
 
     //显示登录平台的方法

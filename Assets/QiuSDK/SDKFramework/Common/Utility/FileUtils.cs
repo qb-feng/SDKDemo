@@ -15,11 +15,11 @@ namespace N3DClient
 #elif UNITY_IPHONE
             path = "file://" + path;
 #endif
-            Debug.LogWarning("准备下载文件：" + path);
+            //Debug.LogWarning("准备下载文件：" + path);
             using (WWW www = new WWW(path))
             {
                 while (!www.isDone) ;
-                Debug.LogWarning("下载文件：" + path + "  内容为：" + www.text);
+               // Debug.LogWarning("下载文件：" + path + "  内容为：" + www.text);
                 return www.bytes;
             }
         }

@@ -17,9 +17,9 @@ namespace AloneSdk
 
         private System.Collections.Generic.Dictionary<string, string> currentSDKParmer = new System.Collections.Generic.Dictionary<string, string>();
 
-        public override void InitSDK(Action<bool> onComplete, Action<bool> onSDKLogoutComplete)
+        public override void InitSDK(SDKData.InitArgModel initArgModel)
         {
-            base.InitSDK(onComplete, onSDKLogoutComplete);
+            base.InitSDK(initArgModel);
 
             if (onInitComplete != null)
                 onInitComplete(true);
@@ -75,19 +75,6 @@ namespace AloneSdk
             {
                 DebugErrorCallBack("GetSDKParamer出错：" + e.Message);
             }
-        }
-
-        public override string GetSDKParamer(string key)
-        {
-            string value = null;
-            currentSDKParmer.TryGetValue(key, out value);
-            return value;
-        }
-
-        public override void RefreshLoginData()
-        {
-            base.RefreshLoginData();
-            currentSDKParmer.Clear();
         }
 
         #region 重写回调

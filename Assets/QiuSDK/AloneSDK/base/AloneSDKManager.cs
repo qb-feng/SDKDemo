@@ -4,10 +4,14 @@ using UnityEngine;
 
 namespace AloneSdk
 {
+    /// <summary>
+    /// 对应config.game配置表里的mSdkTag
+    /// </summary>
     public enum SdkTagType
     {
         quicksdk = 1,
         yyb = 2,
+        u9 = 3,
     }
 
     /// <summary>
@@ -33,6 +37,8 @@ namespace AloneSdk
                         _instance = YYBSdkManager.Instance;
                     else if (mSdkTag == SdkTagType.quicksdk.ToString())
                         _instance = QuickSdkManager.Instance;
+                    else if (mSdkTag == SdkTagType.u9.ToString())
+                        _instance = U9SdkManager.Instance;
                 }
                 return _instance;
             }

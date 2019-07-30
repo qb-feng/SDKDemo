@@ -18,6 +18,11 @@ namespace N3DClient
             string configPath = FileUtils.CombinePath(AssetConfig.SDKStreamingAssetsPath, "config.game");
             byte[] data = FileUtils.GetFileData(configPath);
             string configData = System.Text.Encoding.UTF8.GetString(data);
+            if (string.IsNullOrEmpty(configData)) 
+            {
+                Debug.LogError("config.game 配置表导入失败！");
+                return;
+            }
             Dictionary<string, object> _mClientConfigMap = LitJson.JsonMapper.ToObject<Dictionary<string, object>>(configData);
             foreach (var v in _mClientConfigMap)
             {

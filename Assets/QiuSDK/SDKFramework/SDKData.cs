@@ -4,6 +4,16 @@ using System.Collections.Generic;
 namespace SDKData
 {
     /// <summary>
+    /// 登入参数
+    /// </summary>
+    public class InitArgModel
+    {
+        public Action<bool> onComplete;//初始化成功回调
+        public Action<bool> onSDKLogoutComplete;//sdk注销回调
+        public Action<string> onSDKMessageCallBack;//sdk弹窗消息回调
+    }
+
+    /// <summary>
     /// 更新玩家信息的时机
     /// </summary>
     public enum UpdatePlayerInfoType
@@ -26,6 +36,11 @@ namespace SDKData
     /// </summary>
     public class RoleData
     {
+        /// <summary>
+        /// 用户名
+        /// </summary>
+        public string username;
+
         /// <summary>
         /// 角色id
         /// </summary>
@@ -135,7 +150,7 @@ namespace SDKData
         /// </summary>
         public int productCount;
         /// <summary>
-        /// 结果回调的服务器地址（暂时不用！）
+        /// 结果回调的服务器地址
         /// </summary>
         public string callbackUrl;
 
@@ -160,6 +175,11 @@ namespace SDKData
         /// 额外字节数据
         /// </summary>
         public byte[] datas;
+
+        /// <summary>
+        /// 充值比例
+        /// </summary>
+        public int ratio;
 
         /// <summary>
         /// 获取当前时间长度为10的时间戳
@@ -253,6 +273,7 @@ namespace SDKData
         UC = 4,
         YYB = 5,
         YaoLing = 6,
+        U9 = 7,
 
         //聚合类sdk
         TypeSDK = 1000,//typesdk
@@ -274,6 +295,7 @@ namespace SDKData
         {SDKPlatName.HW,"com.bwyx.hdtt.huawei"},
         {SDKPlatName.YaoLing,"com.yyty.hdtt.yaoling"},
         {SDKPlatName.YYB,"com.tencent.tmgp.djpml"},
+        {SDKPlatName.U9,"com.yyty.qiusdk.u9"},
    
         {SDKPlatName.TypeSDK,"com.yyty.hdtt"},
     };

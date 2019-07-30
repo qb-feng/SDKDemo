@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.yyty.qiusdk.u9"
+    android:installLocation="preferExternal"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name="com.yyty.qiusdk.u9.MainApplication"
+        android:isGame="true"
+        android:label="@string/app_name"
+        android:icon="@drawable/app_icon">
+
+        <!-- v5 demo案例入口 -->
+        <activity
+            android:name="com.yyty.qiusdk.u9.Game_SplashActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="com.yyty.qiusdk.u9.MainActivity"
+            android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|fontScale"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:screenOrientation="fullSensor"
+            android:theme="@android:style/Theme.Holo.Light.DarkActionBar">
+            <meta-data
+                android:name="unityplayer.UnityActivity"
+                android:value="true" />
+        </activity>        
+        
+        <activity
+            android:name="com.hy.game.demo.HyGameDemo"
+            android:configChanges="orientation|keyboardHidden|screenSize" >
+        </activity>
+        <activity
+            android:name="com.hy.gametool.other.HY_QQVipActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/HYGame_Transparent" >
+        </activity>
+        <activity
+            android:name="com.u9pay.activity.login.HYGame_GameCenter"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name="com.test.demo.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Animation.Activity" >
+        </activity>
+        <!-- u9sdk参数 -->
+
+        <!-- 游戏号     必填 -->
+        <meta-data
+            android:name="HY_GAME_ID"
+            android:value="1000" />
+        <!-- 渠道号         分包时修改  直接拷贝 -->
+        <meta-data
+            android:name="HY_CHANNEL_CODE"
+            android:value="100" />
+
+        <!-- 渠道标识      分包时修改  直接拷贝 -->
+        <meta-data
+            android:name="HY_CHANNEL_TYPE"
+            android:value="Test" />
+    </application>
+
+</manifest>

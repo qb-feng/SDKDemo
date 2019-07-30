@@ -128,10 +128,10 @@ public class QuickSdkManager : QuickSDKListener, ISDKManager
     /// <summary>
     /// 初始化(友盟初始化) - 参数：初始化回调  注销登入回调
     /// </summary>
-    public virtual void InitSDK(Action<bool> onComplete, Action<bool> onSDKLogoutComplete)
+    public virtual void InitSDK(SDKData.InitArgModel initArgModel)
     {
-        onInitComplete = onComplete;
-        onLogoutComplete = onSDKLogoutComplete;
+        onInitComplete = initArgModel.onComplete;
+        onLogoutComplete = initArgModel.onSDKLogoutComplete;
 
         SDKLogManager.DebugLog("InitSDK ");
         QuickSDK.getInstance().setListener(this);

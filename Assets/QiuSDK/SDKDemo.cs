@@ -13,6 +13,8 @@ public class SDKDemo : MonoBehaviour
     private Button SaveUMengLevelButton;//保存友盟统计button(普通计数)
     private Button SaveUMengCountButton;//保存友盟计算button
 
+    private Text Message;
+
     private int i = 0;
 
     private ISDKManager sdkmanager = null;
@@ -28,6 +30,7 @@ public class SDKDemo : MonoBehaviour
         OnGameExitButton = transform.Find("OnGameExitButton").GetComponent<Button>();
         SaveUMengLevelButton = transform.Find("SaveUMengLevelButton").GetComponent<Button>();
         SaveUMengCountButton = transform.Find("SaveUMengCountButton").GetComponent<Button>();
+        Message = transform.Find("Message").GetComponent<Text>();
 
         SaveUMengLevelButton.gameObject.SetActive(false);
         SaveUMengCountButton.gameObject.SetActive(false);
@@ -45,29 +48,37 @@ public class SDKDemo : MonoBehaviour
         {
             SDKLogManager.DebugLog("正在初始化sdk！", SDKLogManager.DebugType.LogWarning);
 
-            sdkmanager.InitSDK((result) =>
+            SDKData.InitArgModel initArg = new SDKData.InitArgModel()
             {
-                if (result)
+                onComplete = (result) =>
                 {
-                    SDKLogManager.DebugLog("初始化成功！", SDKLogManager.DebugType.LogWarning);
-                    InitButton.gameObject.SetActive(false);
-                    LoginButton.gameObject.SetActive(true);
-                }
+                    if (result)
+                    {
+                        SDKLogManager.DebugLog("初始化成功！", SDKLogManager.DebugType.LogWarning);
+                        InitButton.gameObject.SetActive(false);
+                        LoginButton.gameObject.SetActive(true);
+                    }
+                },
+                onSDKLogoutComplete = (state) =>
+                 {
+                     if (state)
+                     {
+                         SDKLogManager.DebugLog("注销成功！", SDKLogManager.DebugType.LogWarning);
+                         LoginButton.gameObject.SetActive(true);
+                         SetGameGoState(false);
+                     }
+                     else
+                     {
+                         SDKLogManager.DebugLog("注销失败！", SDKLogManager.DebugType.LogError);
+                     }
+                 },
+                onSDKMessageCallBack = (message) =>
+                {
+                    Message.text = message;
+                },
+            };
 
-            }, (state) =>
-            {
-                if (state)
-                {
-                    SDKLogManager.DebugLog("注销成功！", SDKLogManager.DebugType.LogWarning);
-                    LoginButton.gameObject.SetActive(true);
-                    SetGameGoState(false);
-                }
-                else
-                {
-                    SDKLogManager.DebugLog("注销失败！", SDKLogManager.DebugType.LogError);
-                }
-
-            });
+            sdkmanager.InitSDK(initArg);
 
         });
 
@@ -95,8 +106,8 @@ public class SDKDemo : MonoBehaviour
                 userid = sdkmanager.SDK_Id,
                 amount = 6,
                 productId = "10001",
-                productName = "钻石",
-                productDesc = "钻石",
+                productName = "60钻石",
+                productDesc = "60钻石",
                 callbackMessage = "回调给服务器时的附加消息",
                 productCount = 1,
                 callbackUrl = "http://112.345.678.1/payresult.php",
@@ -107,6 +118,7 @@ public class SDKDemo : MonoBehaviour
                 orderTime = SDKData.PayOrderData.GetCurrentTimeMiss(),
                 extra = "附加参数不得为空",
                 gamename = N3DClient.GameConfig.GetClientConfig("GameName", "yyty"),
+                ratio = 10,//充值比例
 
             };
             sdkmanager.PayItem(payOrderData);

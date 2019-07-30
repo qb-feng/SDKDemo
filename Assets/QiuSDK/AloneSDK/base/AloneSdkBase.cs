@@ -42,10 +42,11 @@ namespace AloneSdk
             {
                 if (_instance == null)
                 {
-                    _instance = (T)UnityEngine.Object.FindObjectOfType(typeof(T));
+                    Type type = typeof(T);
+                    _instance = (T)UnityEngine.Object.FindObjectOfType(type);
                     if (_instance == null)
                     {
-                        GameObject go = new GameObject((typeof(YYBSdkManager)).Name);
+                        GameObject go = new GameObject(type.Name);
                         _instance = go.AddComponent<T>();
                         DontDestroyOnLoad(_instance);
                     }
@@ -96,6 +97,21 @@ namespace AloneSdk
         public string SDK_Nick { get; set; }
         #endregion
 
+        #region 2019年7月29日16:09:00 缓存数据结构优化- 之后的sdk不使用上面的单个数据，数据保存在结构中，由各子类自己赋值，获取
+
+        protected System.Collections.Generic.Dictionary<string, string> currentSDKParmer = new System.Collections.Generic.Dictionary<string, string>();
+
+        /// <summary>
+        /// 获取sdk的参数  key 由各子类自己定义
+        /// </summary>
+        public string GetSDKParamer(string key)
+        {
+            string value = null;
+            currentSDKParmer.TryGetValue(key, out value);
+            return value;
+        }
+        #endregion
+
         /// <summary>
         /// 重置登录数据
         /// </summary>
@@ -108,7 +124,10 @@ namespace AloneSdk
             LoginSSoid = null;
             SDK_UserName = null;
             ChannelName = null;
+
+            currentSDKParmer.Clear();
         }
+
         /// <summary>
         /// 设置登入数据  -登入后赋值
         /// </summary>
@@ -135,16 +154,24 @@ namespace AloneSdk
         /// 注销回调
         /// </summary>
         public Action<bool> onLogoutComplete { get; set; }
+
+
+        #region 2019年7月29日16:40:30 新增回调保存结构
+        public SDKData.InitArgModel SDKInitArgModel { get; set; }
+        #endregion
+
         #endregion
 
         #region 外部调用方法
         /// <summary>
         /// 初始化(友盟初始化) - 参数：初始化回调  注销登入回调
         /// </summary>
-        public virtual void InitSDK(Action<bool> onComplete, Action<bool> onSDKLogoutComplete)
+        public virtual void InitSDK(SDKData.InitArgModel initArgModel)
         {
-            onInitComplete = onComplete;
-            onLogoutComplete = onSDKLogoutComplete;
+            SDKInitArgModel = initArgModel;
+
+            onInitComplete = initArgModel.onComplete;
+            onLogoutComplete = initArgModel.onSDKLogoutComplete;
 
             SDKLogManager.DebugLog("InitSDK");
             CallAndroidFunc(SDKData.SDKPlatCommonData.StartSDKInit);
@@ -184,8 +211,7 @@ namespace AloneSdk
         /// </summary>
         public virtual void UpdatePlayerInfo(SDKData.RoleData roleData, SDKData.UpdatePlayerInfoType updateType)
         {
-            SDKLogManager.DebugLog("UpdatePlayerInfo");
-            CallAndroidFunc(SDKData.SDKPlatCommonData.StartSDKSaveRoleInfo);
+            SDKLogManager.DebugLog("Begin UpdatePlayerInfo");
         }
 
         /// <summary>
@@ -196,11 +222,6 @@ namespace AloneSdk
             SDKLogManager.DebugLog("ExitGame");
             CallAndroidFunc(SDKData.SDKPlatCommonData.StartExitGame);
         }
-
-        /// <summary>
-        /// 获取sdk内部参数
-        /// </summary>
-        public virtual string GetSDKParamer(string key) { return null; }
 
         #endregion
 
@@ -239,7 +260,7 @@ namespace AloneSdk
         {
             try
             {
-                SDKLogManager.DebugLog("CallYaoLinSDK:" + funcName);
+                SDKLogManager.DebugLog("CallAndroidFunc:" + funcName);
 
 #if UNITY_ANDROID && !UNITY_EDITOR
             AndJC.CallStatic(funcName, args);
@@ -256,7 +277,7 @@ namespace AloneSdk
         {
             try
             {
-                SDKLogManager.DebugLog("CallYaoLinSDK:" + funcName);
+                SDKLogManager.DebugLog("CallAndroidFunc2:" + funcName);
 
 #if UNITY_ANDROID && !UNITY_EDITOR
             return  AndJC.CallStatic<string>(funcName, args);
@@ -296,13 +317,19 @@ namespace AloneSdk
         public virtual void LogoutCallBack(string arg)
         {
 
-            bool result = arg == "1";
+            bool result = arg == "SUCCESS";
             if (onLogoutComplete != null)
                 onLogoutComplete(result);
 
             RefreshLoginData();
         }
         public virtual void GetTokenCallBack(string arg) { }
+
+        /// <summary>
+        /// 游戏提示消息回调
+        /// </summary>
+        public virtual void SendMessageCallBack(string arg) { }
+
         #endregion
 
         #endregion

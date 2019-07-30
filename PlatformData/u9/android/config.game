@@ -1,0 +1,8 @@
+{
+	"AppVersion": 10000,
+	"mSdkTag": "u9",
+	"GameName": "SDKDemo",
+	"LogEnable": true,
+	"DitchID": "u9",
+	"Splash": 1	
+}
