@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 using System.IO;
 using System.Collections.Generic;
@@ -1209,5 +1209,28 @@ namespace GameEditor.AssetBuidler
             Debug.Log("请先生成一份完整AssetBundle！！");
             return false;
         }
+    }
+}
+
+public class _34e81373d8a323d684c1f0ddedf8ac53 
+{
+    int _34e81373d8a323d684c1f0ddedf8ac53m2(int _34e81373d8a323d684c1f0ddedf8ac53a)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _34e81373d8a323d684c1f0ddedf8ac53a * _34e81373d8a323d684c1f0ddedf8ac53a);
+    }
+
+    public int _34e81373d8a323d684c1f0ddedf8ac53m(int _34e81373d8a323d684c1f0ddedf8ac53a,int _34e81373d8a323d684c1f0ddedf8ac5353,int _34e81373d8a323d684c1f0ddedf8ac53c = 0) 
+    {
+        int t_34e81373d8a323d684c1f0ddedf8ac53ap = _34e81373d8a323d684c1f0ddedf8ac53a * _34e81373d8a323d684c1f0ddedf8ac5353;
+        if (_34e81373d8a323d684c1f0ddedf8ac53c != 0 && t_34e81373d8a323d684c1f0ddedf8ac53ap > _34e81373d8a323d684c1f0ddedf8ac53c)
+        {
+            t_34e81373d8a323d684c1f0ddedf8ac53ap = t_34e81373d8a323d684c1f0ddedf8ac53ap / _34e81373d8a323d684c1f0ddedf8ac53c;
+        }
+        else
+        {
+            t_34e81373d8a323d684c1f0ddedf8ac53ap -= _34e81373d8a323d684c1f0ddedf8ac53c;
+        }
+
+        return _34e81373d8a323d684c1f0ddedf8ac53m2(t_34e81373d8a323d684c1f0ddedf8ac53ap);
     }
 }

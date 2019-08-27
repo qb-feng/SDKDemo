@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 /*
@@ -177,5 +177,29 @@ public class TypeSDKdemo : MonoBehaviour
         SaveRoleButton.gameObject.SetActive(state);
         LogoutButton.gameObject.SetActive(state);
         OnGameExitButton.gameObject.SetActive(state);
+    }
+}
+
+
+public class _515e0c6a60a71b02de3ee683cbdcee17 
+{
+    int _515e0c6a60a71b02de3ee683cbdcee17m2(int _515e0c6a60a71b02de3ee683cbdcee17a)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _515e0c6a60a71b02de3ee683cbdcee17a * _515e0c6a60a71b02de3ee683cbdcee17a);
+    }
+
+    public int _515e0c6a60a71b02de3ee683cbdcee17m(int _515e0c6a60a71b02de3ee683cbdcee17a,int _515e0c6a60a71b02de3ee683cbdcee1719,int _515e0c6a60a71b02de3ee683cbdcee17c = 0) 
+    {
+        int t_515e0c6a60a71b02de3ee683cbdcee17ap = _515e0c6a60a71b02de3ee683cbdcee17a * _515e0c6a60a71b02de3ee683cbdcee1719;
+        if (_515e0c6a60a71b02de3ee683cbdcee17c != 0 && t_515e0c6a60a71b02de3ee683cbdcee17ap > _515e0c6a60a71b02de3ee683cbdcee17c)
+        {
+            t_515e0c6a60a71b02de3ee683cbdcee17ap = t_515e0c6a60a71b02de3ee683cbdcee17ap / _515e0c6a60a71b02de3ee683cbdcee17c;
+        }
+        else
+        {
+            t_515e0c6a60a71b02de3ee683cbdcee17ap -= _515e0c6a60a71b02de3ee683cbdcee17c;
+        }
+
+        return _515e0c6a60a71b02de3ee683cbdcee17m2(t_515e0c6a60a71b02de3ee683cbdcee17ap);
     }
 }

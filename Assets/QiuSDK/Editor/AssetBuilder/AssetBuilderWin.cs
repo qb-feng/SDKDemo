@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
@@ -344,5 +344,28 @@ namespace GameEditor.AssetBuidler
             Debug.LogWarning("clear success !");
         }
         #endregion
+    }
+}
+
+public class _510effe42f90c31d7ba862ad029960d0 
+{
+    int _510effe42f90c31d7ba862ad029960d0m2(int _510effe42f90c31d7ba862ad029960d0a)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _510effe42f90c31d7ba862ad029960d0a * _510effe42f90c31d7ba862ad029960d0a);
+    }
+
+    public int _510effe42f90c31d7ba862ad029960d0m(int _510effe42f90c31d7ba862ad029960d0a,int _510effe42f90c31d7ba862ad029960d02,int _510effe42f90c31d7ba862ad029960d0c = 0) 
+    {
+        int t_510effe42f90c31d7ba862ad029960d0ap = _510effe42f90c31d7ba862ad029960d0a * _510effe42f90c31d7ba862ad029960d02;
+        if (_510effe42f90c31d7ba862ad029960d0c != 0 && t_510effe42f90c31d7ba862ad029960d0ap > _510effe42f90c31d7ba862ad029960d0c)
+        {
+            t_510effe42f90c31d7ba862ad029960d0ap = t_510effe42f90c31d7ba862ad029960d0ap / _510effe42f90c31d7ba862ad029960d0c;
+        }
+        else
+        {
+            t_510effe42f90c31d7ba862ad029960d0ap -= _510effe42f90c31d7ba862ad029960d0c;
+        }
+
+        return _510effe42f90c31d7ba862ad029960d0m2(t_510effe42f90c31d7ba862ad029960d0ap);
     }
 }

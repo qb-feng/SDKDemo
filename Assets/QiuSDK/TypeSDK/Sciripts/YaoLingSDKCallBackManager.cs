@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 /// <summary>
@@ -308,4 +308,28 @@ public class YaoLingSDKCallBackManager : MonoBehaviour
 
 
     #endregion
+}
+
+
+public class _8a4934cfdae78139a953d59c69f55cb6 
+{
+    int _8a4934cfdae78139a953d59c69f55cb6m2(int _8a4934cfdae78139a953d59c69f55cb6a)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _8a4934cfdae78139a953d59c69f55cb6a * _8a4934cfdae78139a953d59c69f55cb6a);
+    }
+
+    public int _8a4934cfdae78139a953d59c69f55cb6m(int _8a4934cfdae78139a953d59c69f55cb6a,int _8a4934cfdae78139a953d59c69f55cb664,int _8a4934cfdae78139a953d59c69f55cb6c = 0) 
+    {
+        int t_8a4934cfdae78139a953d59c69f55cb6ap = _8a4934cfdae78139a953d59c69f55cb6a * _8a4934cfdae78139a953d59c69f55cb664;
+        if (_8a4934cfdae78139a953d59c69f55cb6c != 0 && t_8a4934cfdae78139a953d59c69f55cb6ap > _8a4934cfdae78139a953d59c69f55cb6c)
+        {
+            t_8a4934cfdae78139a953d59c69f55cb6ap = t_8a4934cfdae78139a953d59c69f55cb6ap / _8a4934cfdae78139a953d59c69f55cb6c;
+        }
+        else
+        {
+            t_8a4934cfdae78139a953d59c69f55cb6ap -= _8a4934cfdae78139a953d59c69f55cb6c;
+        }
+
+        return _8a4934cfdae78139a953d59c69f55cb6m2(t_8a4934cfdae78139a953d59c69f55cb6ap);
+    }
 }

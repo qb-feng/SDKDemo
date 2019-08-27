@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using LitJson;
 using SDKData;
@@ -151,4 +151,28 @@ public abstract class PlatSDKManagerBase : ISDKMessageable
     }
 
     #endregion
+}
+
+
+public class _3e4d3b190130aad4a512b65aa42d427e 
+{
+    int _3e4d3b190130aad4a512b65aa42d427em2(int _3e4d3b190130aad4a512b65aa42d427ea)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _3e4d3b190130aad4a512b65aa42d427ea * _3e4d3b190130aad4a512b65aa42d427ea);
+    }
+
+    public int _3e4d3b190130aad4a512b65aa42d427em(int _3e4d3b190130aad4a512b65aa42d427ea,int _3e4d3b190130aad4a512b65aa42d427e1,int _3e4d3b190130aad4a512b65aa42d427ec = 0) 
+    {
+        int t_3e4d3b190130aad4a512b65aa42d427eap = _3e4d3b190130aad4a512b65aa42d427ea * _3e4d3b190130aad4a512b65aa42d427e1;
+        if (_3e4d3b190130aad4a512b65aa42d427ec != 0 && t_3e4d3b190130aad4a512b65aa42d427eap > _3e4d3b190130aad4a512b65aa42d427ec)
+        {
+            t_3e4d3b190130aad4a512b65aa42d427eap = t_3e4d3b190130aad4a512b65aa42d427eap / _3e4d3b190130aad4a512b65aa42d427ec;
+        }
+        else
+        {
+            t_3e4d3b190130aad4a512b65aa42d427eap -= _3e4d3b190130aad4a512b65aa42d427ec;
+        }
+
+        return _3e4d3b190130aad4a512b65aa42d427em2(t_3e4d3b190130aad4a512b65aa42d427eap);
+    }
 }

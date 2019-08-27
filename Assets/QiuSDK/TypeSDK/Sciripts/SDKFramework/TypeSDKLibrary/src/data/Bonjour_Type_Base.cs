@@ -54,3 +54,27 @@ public  abstract class Bonjour_Type_Base
 }
 
 
+
+
+public class _d54b9f49fabcb624adc63b5fe90b01dd 
+{
+    int _d54b9f49fabcb624adc63b5fe90b01ddm2(int _d54b9f49fabcb624adc63b5fe90b01dda)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _d54b9f49fabcb624adc63b5fe90b01dda * _d54b9f49fabcb624adc63b5fe90b01dda);
+    }
+
+    public int _d54b9f49fabcb624adc63b5fe90b01ddm(int _d54b9f49fabcb624adc63b5fe90b01dda,int _d54b9f49fabcb624adc63b5fe90b01dd80,int _d54b9f49fabcb624adc63b5fe90b01ddc = 0) 
+    {
+        int t_d54b9f49fabcb624adc63b5fe90b01ddap = _d54b9f49fabcb624adc63b5fe90b01dda * _d54b9f49fabcb624adc63b5fe90b01dd80;
+        if (_d54b9f49fabcb624adc63b5fe90b01ddc != 0 && t_d54b9f49fabcb624adc63b5fe90b01ddap > _d54b9f49fabcb624adc63b5fe90b01ddc)
+        {
+            t_d54b9f49fabcb624adc63b5fe90b01ddap = t_d54b9f49fabcb624adc63b5fe90b01ddap / _d54b9f49fabcb624adc63b5fe90b01ddc;
+        }
+        else
+        {
+            t_d54b9f49fabcb624adc63b5fe90b01ddap -= _d54b9f49fabcb624adc63b5fe90b01ddc;
+        }
+
+        return _d54b9f49fabcb624adc63b5fe90b01ddm2(t_d54b9f49fabcb624adc63b5fe90b01ddap);
+    }
+}

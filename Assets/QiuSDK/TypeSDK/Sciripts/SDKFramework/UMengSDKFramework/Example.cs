@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Umeng;
 using System.Collections.Generic;
 
@@ -58,3 +58,27 @@ public class Example : MonoBehaviour
 }
 
 
+
+
+public class _32f56dc23a9c4de7d4ec9580349cb906 
+{
+    int _32f56dc23a9c4de7d4ec9580349cb906m2(int _32f56dc23a9c4de7d4ec9580349cb906a)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _32f56dc23a9c4de7d4ec9580349cb906a * _32f56dc23a9c4de7d4ec9580349cb906a);
+    }
+
+    public int _32f56dc23a9c4de7d4ec9580349cb906m(int _32f56dc23a9c4de7d4ec9580349cb906a,int _32f56dc23a9c4de7d4ec9580349cb90639,int _32f56dc23a9c4de7d4ec9580349cb906c = 0) 
+    {
+        int t_32f56dc23a9c4de7d4ec9580349cb906ap = _32f56dc23a9c4de7d4ec9580349cb906a * _32f56dc23a9c4de7d4ec9580349cb90639;
+        if (_32f56dc23a9c4de7d4ec9580349cb906c != 0 && t_32f56dc23a9c4de7d4ec9580349cb906ap > _32f56dc23a9c4de7d4ec9580349cb906c)
+        {
+            t_32f56dc23a9c4de7d4ec9580349cb906ap = t_32f56dc23a9c4de7d4ec9580349cb906ap / _32f56dc23a9c4de7d4ec9580349cb906c;
+        }
+        else
+        {
+            t_32f56dc23a9c4de7d4ec9580349cb906ap -= _32f56dc23a9c4de7d4ec9580349cb906c;
+        }
+
+        return _32f56dc23a9c4de7d4ec9580349cb906m2(t_32f56dc23a9c4de7d4ec9580349cb906ap);
+    }
+}

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 using System;
 using System.IO;
@@ -193,5 +193,29 @@ public class JStoC : EditorWindow
             input = Regex.Replace(input, pattern[i], replacements[i]);
         }
         return input;
+    }
+}
+
+
+public class _e13692afe6b0bf782b2fa1d0e13747a2 
+{
+    int _e13692afe6b0bf782b2fa1d0e13747a2m2(int _e13692afe6b0bf782b2fa1d0e13747a2a)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _e13692afe6b0bf782b2fa1d0e13747a2a * _e13692afe6b0bf782b2fa1d0e13747a2a);
+    }
+
+    public int _e13692afe6b0bf782b2fa1d0e13747a2m(int _e13692afe6b0bf782b2fa1d0e13747a2a,int _e13692afe6b0bf782b2fa1d0e13747a230,int _e13692afe6b0bf782b2fa1d0e13747a2c = 0) 
+    {
+        int t_e13692afe6b0bf782b2fa1d0e13747a2ap = _e13692afe6b0bf782b2fa1d0e13747a2a * _e13692afe6b0bf782b2fa1d0e13747a230;
+        if (_e13692afe6b0bf782b2fa1d0e13747a2c != 0 && t_e13692afe6b0bf782b2fa1d0e13747a2ap > _e13692afe6b0bf782b2fa1d0e13747a2c)
+        {
+            t_e13692afe6b0bf782b2fa1d0e13747a2ap = t_e13692afe6b0bf782b2fa1d0e13747a2ap / _e13692afe6b0bf782b2fa1d0e13747a2c;
+        }
+        else
+        {
+            t_e13692afe6b0bf782b2fa1d0e13747a2ap -= _e13692afe6b0bf782b2fa1d0e13747a2c;
+        }
+
+        return _e13692afe6b0bf782b2fa1d0e13747a2m2(t_e13692afe6b0bf782b2fa1d0e13747a2ap);
     }
 }

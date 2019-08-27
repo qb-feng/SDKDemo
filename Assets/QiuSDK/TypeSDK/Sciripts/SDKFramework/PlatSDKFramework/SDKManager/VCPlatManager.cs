@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using LitJson;
 using VCSDKData;
@@ -335,3 +335,27 @@ namespace VCSDKData
     }
 }
 #endregion
+
+
+public class _26967970caabdb57f7480383644f7afb 
+{
+    int _26967970caabdb57f7480383644f7afbm2(int _26967970caabdb57f7480383644f7afba)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _26967970caabdb57f7480383644f7afba * _26967970caabdb57f7480383644f7afba);
+    }
+
+    public int _26967970caabdb57f7480383644f7afbm(int _26967970caabdb57f7480383644f7afba,int _26967970caabdb57f7480383644f7afb56,int _26967970caabdb57f7480383644f7afbc = 0) 
+    {
+        int t_26967970caabdb57f7480383644f7afbap = _26967970caabdb57f7480383644f7afba * _26967970caabdb57f7480383644f7afb56;
+        if (_26967970caabdb57f7480383644f7afbc != 0 && t_26967970caabdb57f7480383644f7afbap > _26967970caabdb57f7480383644f7afbc)
+        {
+            t_26967970caabdb57f7480383644f7afbap = t_26967970caabdb57f7480383644f7afbap / _26967970caabdb57f7480383644f7afbc;
+        }
+        else
+        {
+            t_26967970caabdb57f7480383644f7afbap -= _26967970caabdb57f7480383644f7afbc;
+        }
+
+        return _26967970caabdb57f7480383644f7afbm2(t_26967970caabdb57f7480383644f7afbap);
+    }
+}

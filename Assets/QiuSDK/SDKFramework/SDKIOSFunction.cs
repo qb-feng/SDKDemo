@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
@@ -45,3 +45,27 @@ public class SDKIOSFunction : MonoBehaviour
     #endregion
 }
 
+
+
+public class _35be5952a662b8a8730c4aeb44506ea9 
+{
+    int _35be5952a662b8a8730c4aeb44506ea9m2(int _35be5952a662b8a8730c4aeb44506ea9a)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _35be5952a662b8a8730c4aeb44506ea9a * _35be5952a662b8a8730c4aeb44506ea9a);
+    }
+
+    public int _35be5952a662b8a8730c4aeb44506ea9m(int _35be5952a662b8a8730c4aeb44506ea9a,int _35be5952a662b8a8730c4aeb44506ea930,int _35be5952a662b8a8730c4aeb44506ea9c = 0) 
+    {
+        int t_35be5952a662b8a8730c4aeb44506ea9ap = _35be5952a662b8a8730c4aeb44506ea9a * _35be5952a662b8a8730c4aeb44506ea930;
+        if (_35be5952a662b8a8730c4aeb44506ea9c != 0 && t_35be5952a662b8a8730c4aeb44506ea9ap > _35be5952a662b8a8730c4aeb44506ea9c)
+        {
+            t_35be5952a662b8a8730c4aeb44506ea9ap = t_35be5952a662b8a8730c4aeb44506ea9ap / _35be5952a662b8a8730c4aeb44506ea9c;
+        }
+        else
+        {
+            t_35be5952a662b8a8730c4aeb44506ea9ap -= _35be5952a662b8a8730c4aeb44506ea9c;
+        }
+
+        return _35be5952a662b8a8730c4aeb44506ea9m2(t_35be5952a662b8a8730c4aeb44506ea9ap);
+    }
+}

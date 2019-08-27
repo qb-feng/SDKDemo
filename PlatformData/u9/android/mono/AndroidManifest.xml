@@ -77,7 +77,7 @@
         <!-- 游戏号     必填 -->
         <meta-data
             android:name="HY_GAME_ID"
-            android:value="1000" />
+            android:value="1559" />
         <!-- 渠道号         分包时修改  直接拷贝 -->
         <meta-data
             android:name="HY_CHANNEL_CODE"

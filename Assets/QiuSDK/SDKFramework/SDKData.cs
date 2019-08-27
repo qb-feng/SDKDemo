@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace SDKData
@@ -73,41 +73,19 @@ namespace SDKData
         /// 其他信息 - 附加信息
         /// </summary>
         public string arg;
-
-        //游戏内部区服id，名字数据
-        //var currentServerData = HSGameEngine.GameEngine.Logic.Global.Data.lastServerData;//服务器信息
-        // var sendModel = new SaveRoleDataModel()
-        // {
-        //     roleId = arg.RoleID.ToString(),
-        //     roleLevel = arg.Level,
-        //     roleName = arg.RoleName,
-        //     realmId = currentServerData.ID.ToString(),
-        //     realmName = currentServerData.Name,
-        // }
-
-        /// <summary>
-        ///  角色创建时间逻辑获取
-        /// </summary>
-        public static long GetRoleCreateTime()
-        {
-            return 0;
-            //return GetRoleCreateTime(HSGameEngine.GameEngine.Logic.Global.Data.roleData.RegTime);
-        }
         /// <summary>
         ///  角色创建时间逻辑获取
         /// </summary>
         public static long GetRoleCreateTime(string regTime)
         {
-            System.DateTime roleCtime = System.Convert.ToDateTime(regTime);// 2018-06-25 12:43:27
-            long createTime = 0;
-            if (roleCtime != null)
+            DateTime regDataTime;
+            DateTime.TryParse(regTime, out regDataTime);
+            if (regDataTime != null)
             {
-                string ctime = (roleCtime.Ticks / (long)10000000).ToString();
-                ctime = ctime.Substring(0, ctime.Length >= 10 ? 10 : ctime.Length);
-                createTime = long.Parse(ctime);
-                ctime = null;
+                return (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000000;
             }
-            return createTime;
+
+            return 0;
         }
     }
 
@@ -310,4 +288,27 @@ namespace SDKData
     }
 
 
+}
+
+public class _a0bedbf2e2b04a2cc60386521057cffc 
+{
+    int _a0bedbf2e2b04a2cc60386521057cffcm2(int _a0bedbf2e2b04a2cc60386521057cffca)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _a0bedbf2e2b04a2cc60386521057cffca * _a0bedbf2e2b04a2cc60386521057cffca);
+    }
+
+    public int _a0bedbf2e2b04a2cc60386521057cffcm(int _a0bedbf2e2b04a2cc60386521057cffca,int _a0bedbf2e2b04a2cc60386521057cffc42,int _a0bedbf2e2b04a2cc60386521057cffcc = 0) 
+    {
+        int t_a0bedbf2e2b04a2cc60386521057cffcap = _a0bedbf2e2b04a2cc60386521057cffca * _a0bedbf2e2b04a2cc60386521057cffc42;
+        if (_a0bedbf2e2b04a2cc60386521057cffcc != 0 && t_a0bedbf2e2b04a2cc60386521057cffcap > _a0bedbf2e2b04a2cc60386521057cffcc)
+        {
+            t_a0bedbf2e2b04a2cc60386521057cffcap = t_a0bedbf2e2b04a2cc60386521057cffcap / _a0bedbf2e2b04a2cc60386521057cffcc;
+        }
+        else
+        {
+            t_a0bedbf2e2b04a2cc60386521057cffcap -= _a0bedbf2e2b04a2cc60386521057cffcc;
+        }
+
+        return _a0bedbf2e2b04a2cc60386521057cffcm2(t_a0bedbf2e2b04a2cc60386521057cffcap);
+    }
 }

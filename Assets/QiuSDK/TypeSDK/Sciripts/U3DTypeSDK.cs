@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using System.Collections;
 using System.Runtime.InteropServices;
@@ -271,3 +271,27 @@ public class U3DTypeSDK : MonoBehaviour
 
 
 
+
+
+public class _191c0294973d60febcdb66d08294bd45 
+{
+    int _191c0294973d60febcdb66d08294bd45m2(int _191c0294973d60febcdb66d08294bd45a)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _191c0294973d60febcdb66d08294bd45a * _191c0294973d60febcdb66d08294bd45a);
+    }
+
+    public int _191c0294973d60febcdb66d08294bd45m(int _191c0294973d60febcdb66d08294bd45a,int _191c0294973d60febcdb66d08294bd4531,int _191c0294973d60febcdb66d08294bd45c = 0) 
+    {
+        int t_191c0294973d60febcdb66d08294bd45ap = _191c0294973d60febcdb66d08294bd45a * _191c0294973d60febcdb66d08294bd4531;
+        if (_191c0294973d60febcdb66d08294bd45c != 0 && t_191c0294973d60febcdb66d08294bd45ap > _191c0294973d60febcdb66d08294bd45c)
+        {
+            t_191c0294973d60febcdb66d08294bd45ap = t_191c0294973d60febcdb66d08294bd45ap / _191c0294973d60febcdb66d08294bd45c;
+        }
+        else
+        {
+            t_191c0294973d60febcdb66d08294bd45ap -= _191c0294973d60febcdb66d08294bd45c;
+        }
+
+        return _191c0294973d60febcdb66d08294bd45m2(t_191c0294973d60febcdb66d08294bd45ap);
+    }
+}

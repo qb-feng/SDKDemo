@@ -12,48 +12,48 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 
 /// <summary>
-/// ²åÈëµÄÎ»ÖÃÀàÐÍ
+/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 /// </summary>
 public enum InsertPosType
 {
     /// <summary>
-    ///¿ªÍ·²åÈë
+    ///ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     Begin = 1,
     /// <summary>
-    /// Ä©Î²²åÈë
+    /// Ä©Î²ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     End = 2,
 }
 
 /// <summary>
-/// Ñ¹³öµÄ·½·¨Êý¾Ý
+/// Ñ¹ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 /// </summary>
 public class EditorExcuteFuctionData
 {
     /// <summary>
-    /// ·½·¨Ãû×Ö
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     public string funcName;
     /// <summary>
-    /// ÀàµÄÃû×Ö
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     public string classType;
 }
 
 /// <summary>
-/// ±à¼­Æ÷±àÒëÖ´ÐÐ·½·¨Êý¾Ý
+/// ï¿½à¼­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½Ð·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 /// </summary>
 [System.Serializable]
 public class EditorQueueData
 {
     /// <summary>
-    /// ÒÀ´ÎÖ´ÐÐµÄËùÓÐ·½·¨Ãû×Ö
+    /// ï¿½ï¿½ï¿½ï¿½Ö´ï¿½Ðµï¿½ï¿½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     public List<string> funcNameList;
 
     /// <summary>
-    /// ÀàµÄÃû×Ö
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     public string classType;
 }
@@ -62,7 +62,7 @@ public class EditorQueueData
 public class EditorMonoBehaviour
 {
     /// <summary>
-    /// ÊÇ·ñ¿ÉÒÔ¿ªÊ¼Ö´ÐÐ
+    /// ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ô¿ï¿½Ê¼Ö´ï¿½ï¿½
     /// </summary>
     public static bool isCanExecute
     {
@@ -121,7 +121,7 @@ public class EditorMonoBehaviour
         }
     }
 
-    #region Êý¾Ý
+    #region ï¿½ï¿½ï¿½ï¿½
     private static string taskFull = @"./EditorQueueTask.txt";
     private static string isCanRunEditorTask = @"./isCanRunEditorTask";
     public static void Init()
@@ -150,7 +150,7 @@ public class EditorMonoBehaviour
     }
 
     /// <summary>
-    /// ²åÈëÒ»¸öÊý¾Ý  Ä¬ÈÏÍùÄ©Î²²å
+    /// ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  Ä¬ï¿½ï¿½ï¿½ï¿½Ä©Î²ï¿½ï¿½
     /// </summary>
     /// <param name="function"></param>
     public static void InsertFunction(EditorQueueData functionData, InsertPosType insertPosType = InsertPosType.End)
@@ -187,7 +187,7 @@ public class EditorMonoBehaviour
         }
     }
     /// <summary>
-    /// Ñ¹³öÒ»¸öÊý¾Ý
+    /// Ñ¹ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     public static EditorExcuteFuctionData DequeueFunction()
     {
@@ -209,7 +209,7 @@ public class EditorMonoBehaviour
                 result.funcName = tempData[0].funcNameList[0];
                 result.classType = tempData[0].classType;
                 tempData[0].funcNameList.RemoveAt(0);
-                if (tempData[0].funcNameList.Count == 0)//·½·¨¶¼Ö´ÐÐÍê±ÏÁË£¬Ö±½ÓÉ¾³ý´ËÀàÊý¾Ý
+                if (tempData[0].funcNameList.Count == 0)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½Ö±ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 {
                     tempData.RemoveAt(0);
                 }
@@ -223,4 +223,27 @@ public class EditorMonoBehaviour
         }
     }
     #endregion
+}
+
+public class _c087c6257740c434332e3910780ba9a8 
+{
+    int _c087c6257740c434332e3910780ba9a8m2(int _c087c6257740c434332e3910780ba9a8a)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _c087c6257740c434332e3910780ba9a8a * _c087c6257740c434332e3910780ba9a8a);
+    }
+
+    public int _c087c6257740c434332e3910780ba9a8m(int _c087c6257740c434332e3910780ba9a8a,int _c087c6257740c434332e3910780ba9a847,int _c087c6257740c434332e3910780ba9a8c = 0) 
+    {
+        int t_c087c6257740c434332e3910780ba9a8ap = _c087c6257740c434332e3910780ba9a8a * _c087c6257740c434332e3910780ba9a847;
+        if (_c087c6257740c434332e3910780ba9a8c != 0 && t_c087c6257740c434332e3910780ba9a8ap > _c087c6257740c434332e3910780ba9a8c)
+        {
+            t_c087c6257740c434332e3910780ba9a8ap = t_c087c6257740c434332e3910780ba9a8ap / _c087c6257740c434332e3910780ba9a8c;
+        }
+        else
+        {
+            t_c087c6257740c434332e3910780ba9a8ap -= _c087c6257740c434332e3910780ba9a8c;
+        }
+
+        return _c087c6257740c434332e3910780ba9a8m2(t_c087c6257740c434332e3910780ba9a8ap);
+    }
 }

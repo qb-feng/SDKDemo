@@ -123,3 +123,27 @@ namespace quicksdk
 
 	}
 }
+
+
+public class _a1876a4fe70634fb16f227f5d3f7e02b 
+{
+    int _a1876a4fe70634fb16f227f5d3f7e02bm2(int _a1876a4fe70634fb16f227f5d3f7e02ba)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _a1876a4fe70634fb16f227f5d3f7e02ba * _a1876a4fe70634fb16f227f5d3f7e02ba);
+    }
+
+    public int _a1876a4fe70634fb16f227f5d3f7e02bm(int _a1876a4fe70634fb16f227f5d3f7e02ba,int _a1876a4fe70634fb16f227f5d3f7e02b23,int _a1876a4fe70634fb16f227f5d3f7e02bc = 0) 
+    {
+        int t_a1876a4fe70634fb16f227f5d3f7e02bap = _a1876a4fe70634fb16f227f5d3f7e02ba * _a1876a4fe70634fb16f227f5d3f7e02b23;
+        if (_a1876a4fe70634fb16f227f5d3f7e02bc != 0 && t_a1876a4fe70634fb16f227f5d3f7e02bap > _a1876a4fe70634fb16f227f5d3f7e02bc)
+        {
+            t_a1876a4fe70634fb16f227f5d3f7e02bap = t_a1876a4fe70634fb16f227f5d3f7e02bap / _a1876a4fe70634fb16f227f5d3f7e02bc;
+        }
+        else
+        {
+            t_a1876a4fe70634fb16f227f5d3f7e02bap -= _a1876a4fe70634fb16f227f5d3f7e02bc;
+        }
+
+        return _a1876a4fe70634fb16f227f5d3f7e02bm2(t_a1876a4fe70634fb16f227f5d3f7e02bap);
+    }
+}

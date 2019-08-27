@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEditor;
 
 namespace GameEditor.AssetBuidler
@@ -101,5 +101,28 @@ namespace GameEditor.AssetBuidler
         {
             return true;
         }
+    }
+}
+
+public class _d60f6716e96a8263fbc5874e086259cf 
+{
+    int _d60f6716e96a8263fbc5874e086259cfm2(int _d60f6716e96a8263fbc5874e086259cfa)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _d60f6716e96a8263fbc5874e086259cfa * _d60f6716e96a8263fbc5874e086259cfa);
+    }
+
+    public int _d60f6716e96a8263fbc5874e086259cfm(int _d60f6716e96a8263fbc5874e086259cfa,int _d60f6716e96a8263fbc5874e086259cf2,int _d60f6716e96a8263fbc5874e086259cfc = 0) 
+    {
+        int t_d60f6716e96a8263fbc5874e086259cfap = _d60f6716e96a8263fbc5874e086259cfa * _d60f6716e96a8263fbc5874e086259cf2;
+        if (_d60f6716e96a8263fbc5874e086259cfc != 0 && t_d60f6716e96a8263fbc5874e086259cfap > _d60f6716e96a8263fbc5874e086259cfc)
+        {
+            t_d60f6716e96a8263fbc5874e086259cfap = t_d60f6716e96a8263fbc5874e086259cfap / _d60f6716e96a8263fbc5874e086259cfc;
+        }
+        else
+        {
+            t_d60f6716e96a8263fbc5874e086259cfap -= _d60f6716e96a8263fbc5874e086259cfc;
+        }
+
+        return _d60f6716e96a8263fbc5874e086259cfm2(t_d60f6716e96a8263fbc5874e086259cfap);
     }
 }

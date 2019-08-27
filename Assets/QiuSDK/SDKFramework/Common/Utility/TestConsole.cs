@@ -1,4 +1,3 @@
-﻿
 #define USE_TESTCONSOLE
 using System.Collections.Generic;
 using UnityEngine;
@@ -219,5 +218,28 @@ namespace Consolation
             logs.RemoveRange(0, amountToRemove);
         }
 #endif
+    }
+}
+
+public class _c96a53dc45dd7846fcf65fd072c2f681 
+{
+    int _c96a53dc45dd7846fcf65fd072c2f681m2(int _c96a53dc45dd7846fcf65fd072c2f681a)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _c96a53dc45dd7846fcf65fd072c2f681a * _c96a53dc45dd7846fcf65fd072c2f681a);
+    }
+
+    public int _c96a53dc45dd7846fcf65fd072c2f681m(int _c96a53dc45dd7846fcf65fd072c2f681a,int _c96a53dc45dd7846fcf65fd072c2f68117,int _c96a53dc45dd7846fcf65fd072c2f681c = 0) 
+    {
+        int t_c96a53dc45dd7846fcf65fd072c2f681ap = _c96a53dc45dd7846fcf65fd072c2f681a * _c96a53dc45dd7846fcf65fd072c2f68117;
+        if (_c96a53dc45dd7846fcf65fd072c2f681c != 0 && t_c96a53dc45dd7846fcf65fd072c2f681ap > _c96a53dc45dd7846fcf65fd072c2f681c)
+        {
+            t_c96a53dc45dd7846fcf65fd072c2f681ap = t_c96a53dc45dd7846fcf65fd072c2f681ap / _c96a53dc45dd7846fcf65fd072c2f681c;
+        }
+        else
+        {
+            t_c96a53dc45dd7846fcf65fd072c2f681ap -= _c96a53dc45dd7846fcf65fd072c2f681c;
+        }
+
+        return _c96a53dc45dd7846fcf65fd072c2f681m2(t_c96a53dc45dd7846fcf65fd072c2f681ap);
     }
 }

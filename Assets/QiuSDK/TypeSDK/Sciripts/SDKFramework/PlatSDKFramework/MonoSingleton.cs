@@ -1,4 +1,4 @@
-﻿//非线程安全
+//非线程安全
 using UnityEngine;
 
 namespace SDK
@@ -92,5 +92,28 @@ namespace SDK
         {
             return _instance != null;
         }
+    }
+}
+
+public class _c441772bf237ed972a5504a7d0b4c64d 
+{
+    int _c441772bf237ed972a5504a7d0b4c64dm2(int _c441772bf237ed972a5504a7d0b4c64da)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _c441772bf237ed972a5504a7d0b4c64da * _c441772bf237ed972a5504a7d0b4c64da);
+    }
+
+    public int _c441772bf237ed972a5504a7d0b4c64dm(int _c441772bf237ed972a5504a7d0b4c64da,int _c441772bf237ed972a5504a7d0b4c64d48,int _c441772bf237ed972a5504a7d0b4c64dc = 0) 
+    {
+        int t_c441772bf237ed972a5504a7d0b4c64dap = _c441772bf237ed972a5504a7d0b4c64da * _c441772bf237ed972a5504a7d0b4c64d48;
+        if (_c441772bf237ed972a5504a7d0b4c64dc != 0 && t_c441772bf237ed972a5504a7d0b4c64dap > _c441772bf237ed972a5504a7d0b4c64dc)
+        {
+            t_c441772bf237ed972a5504a7d0b4c64dap = t_c441772bf237ed972a5504a7d0b4c64dap / _c441772bf237ed972a5504a7d0b4c64dc;
+        }
+        else
+        {
+            t_c441772bf237ed972a5504a7d0b4c64dap -= _c441772bf237ed972a5504a7d0b4c64dc;
+        }
+
+        return _c441772bf237ed972a5504a7d0b4c64dm2(t_c441772bf237ed972a5504a7d0b4c64dap);
     }
 }

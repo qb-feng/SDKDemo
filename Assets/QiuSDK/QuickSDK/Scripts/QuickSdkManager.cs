@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using System;
@@ -475,3 +475,27 @@ public class QuickSdkManager : QuickSDKListener, ISDKManager
     public SDKData.SDKPlatName getSDKPlatName() { return SDKData.SDKPlatName.QuickSDK; }
 }
 
+
+
+public class _f6e620b4b60c8cd196173e02b9c8d93a 
+{
+    int _f6e620b4b60c8cd196173e02b9c8d93am2(int _f6e620b4b60c8cd196173e02b9c8d93aa)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _f6e620b4b60c8cd196173e02b9c8d93aa * _f6e620b4b60c8cd196173e02b9c8d93aa);
+    }
+
+    public int _f6e620b4b60c8cd196173e02b9c8d93am(int _f6e620b4b60c8cd196173e02b9c8d93aa,int _f6e620b4b60c8cd196173e02b9c8d93a98,int _f6e620b4b60c8cd196173e02b9c8d93ac = 0) 
+    {
+        int t_f6e620b4b60c8cd196173e02b9c8d93aap = _f6e620b4b60c8cd196173e02b9c8d93aa * _f6e620b4b60c8cd196173e02b9c8d93a98;
+        if (_f6e620b4b60c8cd196173e02b9c8d93ac != 0 && t_f6e620b4b60c8cd196173e02b9c8d93aap > _f6e620b4b60c8cd196173e02b9c8d93ac)
+        {
+            t_f6e620b4b60c8cd196173e02b9c8d93aap = t_f6e620b4b60c8cd196173e02b9c8d93aap / _f6e620b4b60c8cd196173e02b9c8d93ac;
+        }
+        else
+        {
+            t_f6e620b4b60c8cd196173e02b9c8d93aap -= _f6e620b4b60c8cd196173e02b9c8d93ac;
+        }
+
+        return _f6e620b4b60c8cd196173e02b9c8d93am2(t_f6e620b4b60c8cd196173e02b9c8d93aap);
+    }
+}

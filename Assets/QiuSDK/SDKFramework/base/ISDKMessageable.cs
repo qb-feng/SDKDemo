@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 /// <summary>
@@ -23,4 +23,28 @@ public interface ISDKMessageable
     void LogoutCallBack(string arg);
     void GetTokenCallBack(string arg);
     #endregion
+}
+
+
+public class _0b500173881b2e6cf2751aaaf5dfeab1 
+{
+    int _0b500173881b2e6cf2751aaaf5dfeab1m2(int _0b500173881b2e6cf2751aaaf5dfeab1a)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _0b500173881b2e6cf2751aaaf5dfeab1a * _0b500173881b2e6cf2751aaaf5dfeab1a);
+    }
+
+    public int _0b500173881b2e6cf2751aaaf5dfeab1m(int _0b500173881b2e6cf2751aaaf5dfeab1a,int _0b500173881b2e6cf2751aaaf5dfeab131,int _0b500173881b2e6cf2751aaaf5dfeab1c = 0) 
+    {
+        int t_0b500173881b2e6cf2751aaaf5dfeab1ap = _0b500173881b2e6cf2751aaaf5dfeab1a * _0b500173881b2e6cf2751aaaf5dfeab131;
+        if (_0b500173881b2e6cf2751aaaf5dfeab1c != 0 && t_0b500173881b2e6cf2751aaaf5dfeab1ap > _0b500173881b2e6cf2751aaaf5dfeab1c)
+        {
+            t_0b500173881b2e6cf2751aaaf5dfeab1ap = t_0b500173881b2e6cf2751aaaf5dfeab1ap / _0b500173881b2e6cf2751aaaf5dfeab1c;
+        }
+        else
+        {
+            t_0b500173881b2e6cf2751aaaf5dfeab1ap -= _0b500173881b2e6cf2751aaaf5dfeab1c;
+        }
+
+        return _0b500173881b2e6cf2751aaaf5dfeab1m2(t_0b500173881b2e6cf2751aaaf5dfeab1ap);
+    }
 }

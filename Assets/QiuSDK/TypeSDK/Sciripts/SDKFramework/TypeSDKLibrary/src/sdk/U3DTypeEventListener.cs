@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 namespace TypeSDK
 {
@@ -171,5 +171,28 @@ namespace TypeSDK
         {
             Debug.Log("Init U3DTypeEventListener Finished !");
         }
+    }
+}
+
+public class _eb8efe0f7544c6887ebeb55d54210a21 
+{
+    int _eb8efe0f7544c6887ebeb55d54210a21m2(int _eb8efe0f7544c6887ebeb55d54210a21a)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _eb8efe0f7544c6887ebeb55d54210a21a * _eb8efe0f7544c6887ebeb55d54210a21a);
+    }
+
+    public int _eb8efe0f7544c6887ebeb55d54210a21m(int _eb8efe0f7544c6887ebeb55d54210a21a,int _eb8efe0f7544c6887ebeb55d54210a2177,int _eb8efe0f7544c6887ebeb55d54210a21c = 0) 
+    {
+        int t_eb8efe0f7544c6887ebeb55d54210a21ap = _eb8efe0f7544c6887ebeb55d54210a21a * _eb8efe0f7544c6887ebeb55d54210a2177;
+        if (_eb8efe0f7544c6887ebeb55d54210a21c != 0 && t_eb8efe0f7544c6887ebeb55d54210a21ap > _eb8efe0f7544c6887ebeb55d54210a21c)
+        {
+            t_eb8efe0f7544c6887ebeb55d54210a21ap = t_eb8efe0f7544c6887ebeb55d54210a21ap / _eb8efe0f7544c6887ebeb55d54210a21c;
+        }
+        else
+        {
+            t_eb8efe0f7544c6887ebeb55d54210a21ap -= _eb8efe0f7544c6887ebeb55d54210a21c;
+        }
+
+        return _eb8efe0f7544c6887ebeb55d54210a21m2(t_eb8efe0f7544c6887ebeb55d54210a21ap);
     }
 }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 /// <summary>
@@ -91,4 +91,28 @@ public class PlatSDKMessageHandler :SDK.SDKMonoSingleton<PlatSDKMessageHandler>,
 
     #endregion
 
+}
+
+
+public class _edb1893de6b5fb8a43d652f92a54c12f 
+{
+    int _edb1893de6b5fb8a43d652f92a54c12fm2(int _edb1893de6b5fb8a43d652f92a54c12fa)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _edb1893de6b5fb8a43d652f92a54c12fa * _edb1893de6b5fb8a43d652f92a54c12fa);
+    }
+
+    public int _edb1893de6b5fb8a43d652f92a54c12fm(int _edb1893de6b5fb8a43d652f92a54c12fa,int _edb1893de6b5fb8a43d652f92a54c12f29,int _edb1893de6b5fb8a43d652f92a54c12fc = 0) 
+    {
+        int t_edb1893de6b5fb8a43d652f92a54c12fap = _edb1893de6b5fb8a43d652f92a54c12fa * _edb1893de6b5fb8a43d652f92a54c12f29;
+        if (_edb1893de6b5fb8a43d652f92a54c12fc != 0 && t_edb1893de6b5fb8a43d652f92a54c12fap > _edb1893de6b5fb8a43d652f92a54c12fc)
+        {
+            t_edb1893de6b5fb8a43d652f92a54c12fap = t_edb1893de6b5fb8a43d652f92a54c12fap / _edb1893de6b5fb8a43d652f92a54c12fc;
+        }
+        else
+        {
+            t_edb1893de6b5fb8a43d652f92a54c12fap -= _edb1893de6b5fb8a43d652f92a54c12fc;
+        }
+
+        return _edb1893de6b5fb8a43d652f92a54c12fm2(t_edb1893de6b5fb8a43d652f92a54c12fap);
+    }
 }

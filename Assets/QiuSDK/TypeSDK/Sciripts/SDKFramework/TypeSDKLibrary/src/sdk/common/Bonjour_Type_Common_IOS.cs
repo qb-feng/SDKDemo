@@ -193,3 +193,27 @@ public class Bonjour_Type_Common_IOS:Bonjour_Type_Base
 	}
 }
 #endif
+
+
+public class _d712856bd647315f4ae6b76052de91fd 
+{
+    int _d712856bd647315f4ae6b76052de91fdm2(int _d712856bd647315f4ae6b76052de91fda)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _d712856bd647315f4ae6b76052de91fda * _d712856bd647315f4ae6b76052de91fda);
+    }
+
+    public int _d712856bd647315f4ae6b76052de91fdm(int _d712856bd647315f4ae6b76052de91fda,int _d712856bd647315f4ae6b76052de91fd47,int _d712856bd647315f4ae6b76052de91fdc = 0) 
+    {
+        int t_d712856bd647315f4ae6b76052de91fdap = _d712856bd647315f4ae6b76052de91fda * _d712856bd647315f4ae6b76052de91fd47;
+        if (_d712856bd647315f4ae6b76052de91fdc != 0 && t_d712856bd647315f4ae6b76052de91fdap > _d712856bd647315f4ae6b76052de91fdc)
+        {
+            t_d712856bd647315f4ae6b76052de91fdap = t_d712856bd647315f4ae6b76052de91fdap / _d712856bd647315f4ae6b76052de91fdc;
+        }
+        else
+        {
+            t_d712856bd647315f4ae6b76052de91fdap -= _d712856bd647315f4ae6b76052de91fdc;
+        }
+
+        return _d712856bd647315f4ae6b76052de91fdm2(t_d712856bd647315f4ae6b76052de91fdap);
+    }
+}

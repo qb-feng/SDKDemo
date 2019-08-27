@@ -4,5 +4,6 @@
 	"GameName": "SDKDemo",
 	"LogEnable": true,
 	"DitchID": "u9",
-	"Splash": 1	
+	"Splash": 1,
+	"CheckSimulatorEnable":true
 }

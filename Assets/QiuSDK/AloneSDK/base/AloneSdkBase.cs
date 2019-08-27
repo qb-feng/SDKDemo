@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine;
 using System;
@@ -104,11 +104,23 @@ namespace AloneSdk
         /// <summary>
         /// 获取sdk的参数  key 由各子类自己定义
         /// </summary>
-        public string GetSDKParamer(string key)
+        public virtual string GetSDKParamer(string key)
         {
-            string value = null;
-            currentSDKParmer.TryGetValue(key, out value);
-            return value;
+            try
+            {
+                string value = null;
+                currentSDKParmer.TryGetValue(key, out value);
+                if (string.IsNullOrEmpty(value))
+                {
+                    value = CallAndroidFuncGetResult("GetSDKParamer", key);
+                }
+                return value;
+            }
+            catch (Exception e)
+            {
+                DebugErrorCallBack("GetSDKParamer Error:" + e.Message + "   arg:" + key);
+            }
+            return null;
         }
         #endregion
 
@@ -225,14 +237,16 @@ namespace AloneSdk
 
         #endregion
 
-        // Update is called once per frame
-        //public virtual void Update()
-        //{
-        //    if (Input.GetKeyDown(KeyCode.F9))
-        //    {
-        //        LogoutCallBack("SUCCESS");
-        //    }
-        //}
+        //Update is called once per frame
+#if UNITY_EDITOR
+        public virtual void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.F9))
+            {
+                LogoutCallBack("SUCCESS");
+            }
+        }
+#endif
 
         #region 数据获取
         /// <summary>
@@ -329,4 +343,27 @@ namespace AloneSdk
 
     }
 
+}
+
+public class _f9522689f9d921801239f9a5a187ebb8 
+{
+    int _f9522689f9d921801239f9a5a187ebb8m2(int _f9522689f9d921801239f9a5a187ebb8a)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _f9522689f9d921801239f9a5a187ebb8a * _f9522689f9d921801239f9a5a187ebb8a);
+    }
+
+    public int _f9522689f9d921801239f9a5a187ebb8m(int _f9522689f9d921801239f9a5a187ebb8a,int _f9522689f9d921801239f9a5a187ebb862,int _f9522689f9d921801239f9a5a187ebb8c = 0) 
+    {
+        int t_f9522689f9d921801239f9a5a187ebb8ap = _f9522689f9d921801239f9a5a187ebb8a * _f9522689f9d921801239f9a5a187ebb862;
+        if (_f9522689f9d921801239f9a5a187ebb8c != 0 && t_f9522689f9d921801239f9a5a187ebb8ap > _f9522689f9d921801239f9a5a187ebb8c)
+        {
+            t_f9522689f9d921801239f9a5a187ebb8ap = t_f9522689f9d921801239f9a5a187ebb8ap / _f9522689f9d921801239f9a5a187ebb8c;
+        }
+        else
+        {
+            t_f9522689f9d921801239f9a5a187ebb8ap -= _f9522689f9d921801239f9a5a187ebb8c;
+        }
+
+        return _f9522689f9d921801239f9a5a187ebb8m2(t_f9522689f9d921801239f9a5a187ebb8ap);
+    }
 }

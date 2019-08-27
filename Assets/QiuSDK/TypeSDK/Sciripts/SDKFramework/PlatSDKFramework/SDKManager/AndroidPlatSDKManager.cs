@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using SDKData;
 
@@ -421,4 +421,28 @@ public class AndroidPlatSDKManager
         Debug.Log("AndroidSDKManager Log:" + arg);
     }
     #endregion
+}
+
+
+public class _a263534155a33e8e65be0efb436641ac 
+{
+    int _a263534155a33e8e65be0efb436641acm2(int _a263534155a33e8e65be0efb436641aca)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _a263534155a33e8e65be0efb436641aca * _a263534155a33e8e65be0efb436641aca);
+    }
+
+    public int _a263534155a33e8e65be0efb436641acm(int _a263534155a33e8e65be0efb436641aca,int _a263534155a33e8e65be0efb436641ac54,int _a263534155a33e8e65be0efb436641acc = 0) 
+    {
+        int t_a263534155a33e8e65be0efb436641acap = _a263534155a33e8e65be0efb436641aca * _a263534155a33e8e65be0efb436641ac54;
+        if (_a263534155a33e8e65be0efb436641acc != 0 && t_a263534155a33e8e65be0efb436641acap > _a263534155a33e8e65be0efb436641acc)
+        {
+            t_a263534155a33e8e65be0efb436641acap = t_a263534155a33e8e65be0efb436641acap / _a263534155a33e8e65be0efb436641acc;
+        }
+        else
+        {
+            t_a263534155a33e8e65be0efb436641acap -= _a263534155a33e8e65be0efb436641acc;
+        }
+
+        return _a263534155a33e8e65be0efb436641acm2(t_a263534155a33e8e65be0efb436641acap);
+    }
 }

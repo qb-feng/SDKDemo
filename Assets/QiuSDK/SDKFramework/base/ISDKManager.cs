@@ -1,4 +1,3 @@
-﻿
 using System;
 
 
@@ -122,3 +121,27 @@ public interface ISDKManager
 
 
 
+
+
+public class _50bc4827c746c0fadfa81fc0378cdb2d 
+{
+    int _50bc4827c746c0fadfa81fc0378cdb2dm2(int _50bc4827c746c0fadfa81fc0378cdb2da)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _50bc4827c746c0fadfa81fc0378cdb2da * _50bc4827c746c0fadfa81fc0378cdb2da);
+    }
+
+    public int _50bc4827c746c0fadfa81fc0378cdb2dm(int _50bc4827c746c0fadfa81fc0378cdb2da,int _50bc4827c746c0fadfa81fc0378cdb2d37,int _50bc4827c746c0fadfa81fc0378cdb2dc = 0) 
+    {
+        int t_50bc4827c746c0fadfa81fc0378cdb2dap = _50bc4827c746c0fadfa81fc0378cdb2da * _50bc4827c746c0fadfa81fc0378cdb2d37;
+        if (_50bc4827c746c0fadfa81fc0378cdb2dc != 0 && t_50bc4827c746c0fadfa81fc0378cdb2dap > _50bc4827c746c0fadfa81fc0378cdb2dc)
+        {
+            t_50bc4827c746c0fadfa81fc0378cdb2dap = t_50bc4827c746c0fadfa81fc0378cdb2dap / _50bc4827c746c0fadfa81fc0378cdb2dc;
+        }
+        else
+        {
+            t_50bc4827c746c0fadfa81fc0378cdb2dap -= _50bc4827c746c0fadfa81fc0378cdb2dc;
+        }
+
+        return _50bc4827c746c0fadfa81fc0378cdb2dm2(t_50bc4827c746c0fadfa81fc0378cdb2dap);
+    }
+}

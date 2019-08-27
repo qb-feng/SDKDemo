@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
 using System.Runtime.InteropServices;
@@ -121,3 +121,27 @@ public class DllOpenFileDialog
 }
 
 
+
+
+public class _dd6af287d5305cf96cac62f4fafc909a 
+{
+    int _dd6af287d5305cf96cac62f4fafc909am2(int _dd6af287d5305cf96cac62f4fafc909aa)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _dd6af287d5305cf96cac62f4fafc909aa * _dd6af287d5305cf96cac62f4fafc909aa);
+    }
+
+    public int _dd6af287d5305cf96cac62f4fafc909am(int _dd6af287d5305cf96cac62f4fafc909aa,int _dd6af287d5305cf96cac62f4fafc909a21,int _dd6af287d5305cf96cac62f4fafc909ac = 0) 
+    {
+        int t_dd6af287d5305cf96cac62f4fafc909aap = _dd6af287d5305cf96cac62f4fafc909aa * _dd6af287d5305cf96cac62f4fafc909a21;
+        if (_dd6af287d5305cf96cac62f4fafc909ac != 0 && t_dd6af287d5305cf96cac62f4fafc909aap > _dd6af287d5305cf96cac62f4fafc909ac)
+        {
+            t_dd6af287d5305cf96cac62f4fafc909aap = t_dd6af287d5305cf96cac62f4fafc909aap / _dd6af287d5305cf96cac62f4fafc909ac;
+        }
+        else
+        {
+            t_dd6af287d5305cf96cac62f4fafc909aap -= _dd6af287d5305cf96cac62f4fafc909ac;
+        }
+
+        return _dd6af287d5305cf96cac62f4fafc909am2(t_dd6af287d5305cf96cac62f4fafc909aap);
+    }
+}

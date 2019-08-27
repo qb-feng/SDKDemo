@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
@@ -101,5 +101,29 @@ public class ScriptAssetSplitConfig
         }
 
         return bundleArray;
+    }
+}
+
+
+public class _1842bfb376e4fb0e7ab8f2f021bd707b 
+{
+    int _1842bfb376e4fb0e7ab8f2f021bd707bm2(int _1842bfb376e4fb0e7ab8f2f021bd707ba)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _1842bfb376e4fb0e7ab8f2f021bd707ba * _1842bfb376e4fb0e7ab8f2f021bd707ba);
+    }
+
+    public int _1842bfb376e4fb0e7ab8f2f021bd707bm(int _1842bfb376e4fb0e7ab8f2f021bd707ba,int _1842bfb376e4fb0e7ab8f2f021bd707b1,int _1842bfb376e4fb0e7ab8f2f021bd707bc = 0) 
+    {
+        int t_1842bfb376e4fb0e7ab8f2f021bd707bap = _1842bfb376e4fb0e7ab8f2f021bd707ba * _1842bfb376e4fb0e7ab8f2f021bd707b1;
+        if (_1842bfb376e4fb0e7ab8f2f021bd707bc != 0 && t_1842bfb376e4fb0e7ab8f2f021bd707bap > _1842bfb376e4fb0e7ab8f2f021bd707bc)
+        {
+            t_1842bfb376e4fb0e7ab8f2f021bd707bap = t_1842bfb376e4fb0e7ab8f2f021bd707bap / _1842bfb376e4fb0e7ab8f2f021bd707bc;
+        }
+        else
+        {
+            t_1842bfb376e4fb0e7ab8f2f021bd707bap -= _1842bfb376e4fb0e7ab8f2f021bd707bc;
+        }
+
+        return _1842bfb376e4fb0e7ab8f2f021bd707bm2(t_1842bfb376e4fb0e7ab8f2f021bd707bap);
     }
 }

@@ -47,3 +47,27 @@ namespace TypeSDKTool
 
 }
 
+
+
+public class _b236d8da637b05e0513b794e3574e0ca 
+{
+    int _b236d8da637b05e0513b794e3574e0cam2(int _b236d8da637b05e0513b794e3574e0caa)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _b236d8da637b05e0513b794e3574e0caa * _b236d8da637b05e0513b794e3574e0caa);
+    }
+
+    public int _b236d8da637b05e0513b794e3574e0cam(int _b236d8da637b05e0513b794e3574e0caa,int _b236d8da637b05e0513b794e3574e0ca57,int _b236d8da637b05e0513b794e3574e0cac = 0) 
+    {
+        int t_b236d8da637b05e0513b794e3574e0caap = _b236d8da637b05e0513b794e3574e0caa * _b236d8da637b05e0513b794e3574e0ca57;
+        if (_b236d8da637b05e0513b794e3574e0cac != 0 && t_b236d8da637b05e0513b794e3574e0caap > _b236d8da637b05e0513b794e3574e0cac)
+        {
+            t_b236d8da637b05e0513b794e3574e0caap = t_b236d8da637b05e0513b794e3574e0caap / _b236d8da637b05e0513b794e3574e0cac;
+        }
+        else
+        {
+            t_b236d8da637b05e0513b794e3574e0caap -= _b236d8da637b05e0513b794e3574e0cac;
+        }
+
+        return _b236d8da637b05e0513b794e3574e0cam2(t_b236d8da637b05e0513b794e3574e0caap);
+    }
+}

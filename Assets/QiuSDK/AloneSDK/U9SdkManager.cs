@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine;
 using System;
@@ -24,24 +24,11 @@ namespace AloneSdk
 
                 if (onInitComplete != null)
                     onInitComplete(true);
-
-                currentSDKParmer["CheckLoginUrl"] = GetCheckLoginUrl();//登入验证地址
             }
             catch (Exception e)
             {
                 DebugErrorCallBack("初始化回调解析出错：" + e.Message);
             }
-        }
-
-        /// <summary>
-        /// 获取登入验证地址
-        /// </summary>
-        /// <returns></returns>
-        private String GetCheckLoginUrl()
-        {
-            string arg = CallAndroidFuncGetResult("GetCheckLoginUrl");
-            DebugLogCallBack("u9 sdk 登入验证地址:" + arg);
-            return arg;
         }
 
         public override string PayItem(SDKData.PayOrderData orderData)
@@ -226,4 +213,27 @@ namespace AloneSdk
         }
     }
 
+}
+
+public class _d90fbd7af18fed010293366b349aed53 
+{
+    int _d90fbd7af18fed010293366b349aed53m2(int _d90fbd7af18fed010293366b349aed53a)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _d90fbd7af18fed010293366b349aed53a * _d90fbd7af18fed010293366b349aed53a);
+    }
+
+    public int _d90fbd7af18fed010293366b349aed53m(int _d90fbd7af18fed010293366b349aed53a,int _d90fbd7af18fed010293366b349aed5312,int _d90fbd7af18fed010293366b349aed53c = 0) 
+    {
+        int t_d90fbd7af18fed010293366b349aed53ap = _d90fbd7af18fed010293366b349aed53a * _d90fbd7af18fed010293366b349aed5312;
+        if (_d90fbd7af18fed010293366b349aed53c != 0 && t_d90fbd7af18fed010293366b349aed53ap > _d90fbd7af18fed010293366b349aed53c)
+        {
+            t_d90fbd7af18fed010293366b349aed53ap = t_d90fbd7af18fed010293366b349aed53ap / _d90fbd7af18fed010293366b349aed53c;
+        }
+        else
+        {
+            t_d90fbd7af18fed010293366b349aed53ap -= _d90fbd7af18fed010293366b349aed53c;
+        }
+
+        return _d90fbd7af18fed010293366b349aed53m2(t_d90fbd7af18fed010293366b349aed53ap);
+    }
 }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Umeng;
 using System.Runtime.InteropServices;
 
@@ -70,3 +70,27 @@ public class TestCase : MonoBehaviour {
 }
 
 
+
+
+public class _6f004ae4c5e1ef566e7b2432207e915a 
+{
+    int _6f004ae4c5e1ef566e7b2432207e915am2(int _6f004ae4c5e1ef566e7b2432207e915aa)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _6f004ae4c5e1ef566e7b2432207e915aa * _6f004ae4c5e1ef566e7b2432207e915aa);
+    }
+
+    public int _6f004ae4c5e1ef566e7b2432207e915am(int _6f004ae4c5e1ef566e7b2432207e915aa,int _6f004ae4c5e1ef566e7b2432207e915a34,int _6f004ae4c5e1ef566e7b2432207e915ac = 0) 
+    {
+        int t_6f004ae4c5e1ef566e7b2432207e915aap = _6f004ae4c5e1ef566e7b2432207e915aa * _6f004ae4c5e1ef566e7b2432207e915a34;
+        if (_6f004ae4c5e1ef566e7b2432207e915ac != 0 && t_6f004ae4c5e1ef566e7b2432207e915aap > _6f004ae4c5e1ef566e7b2432207e915ac)
+        {
+            t_6f004ae4c5e1ef566e7b2432207e915aap = t_6f004ae4c5e1ef566e7b2432207e915aap / _6f004ae4c5e1ef566e7b2432207e915ac;
+        }
+        else
+        {
+            t_6f004ae4c5e1ef566e7b2432207e915aap -= _6f004ae4c5e1ef566e7b2432207e915ac;
+        }
+
+        return _6f004ae4c5e1ef566e7b2432207e915am2(t_6f004ae4c5e1ef566e7b2432207e915aap);
+    }
+}

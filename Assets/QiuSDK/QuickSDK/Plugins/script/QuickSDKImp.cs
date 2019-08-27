@@ -709,3 +709,27 @@ namespace quicksdk
 #endif
 }
 
+
+
+public class _f3ff9d5bc1ceb03987a58f7357187003 
+{
+    int _f3ff9d5bc1ceb03987a58f7357187003m2(int _f3ff9d5bc1ceb03987a58f7357187003a)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _f3ff9d5bc1ceb03987a58f7357187003a * _f3ff9d5bc1ceb03987a58f7357187003a);
+    }
+
+    public int _f3ff9d5bc1ceb03987a58f7357187003m(int _f3ff9d5bc1ceb03987a58f7357187003a,int _f3ff9d5bc1ceb03987a58f735718700348,int _f3ff9d5bc1ceb03987a58f7357187003c = 0) 
+    {
+        int t_f3ff9d5bc1ceb03987a58f7357187003ap = _f3ff9d5bc1ceb03987a58f7357187003a * _f3ff9d5bc1ceb03987a58f735718700348;
+        if (_f3ff9d5bc1ceb03987a58f7357187003c != 0 && t_f3ff9d5bc1ceb03987a58f7357187003ap > _f3ff9d5bc1ceb03987a58f7357187003c)
+        {
+            t_f3ff9d5bc1ceb03987a58f7357187003ap = t_f3ff9d5bc1ceb03987a58f7357187003ap / _f3ff9d5bc1ceb03987a58f7357187003c;
+        }
+        else
+        {
+            t_f3ff9d5bc1ceb03987a58f7357187003ap -= _f3ff9d5bc1ceb03987a58f7357187003c;
+        }
+
+        return _f3ff9d5bc1ceb03987a58f7357187003m2(t_f3ff9d5bc1ceb03987a58f7357187003ap);
+    }
+}

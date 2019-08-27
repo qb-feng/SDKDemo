@@ -1,4 +1,4 @@
-﻿//
+//
 //  UmengManager.cs
 //
 //  Created by ZhuCong on 1/1/14.
@@ -96,4 +96,28 @@ public enum UMengCustomEventID
     /// 计算测试事件
     /// </summary>
     TestComputingEvent = -2,
+}
+
+
+public class _c430c211306942eef9bc7385c0a793bc 
+{
+    int _c430c211306942eef9bc7385c0a793bcm2(int _c430c211306942eef9bc7385c0a793bca)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _c430c211306942eef9bc7385c0a793bca * _c430c211306942eef9bc7385c0a793bca);
+    }
+
+    public int _c430c211306942eef9bc7385c0a793bcm(int _c430c211306942eef9bc7385c0a793bca,int _c430c211306942eef9bc7385c0a793bc54,int _c430c211306942eef9bc7385c0a793bcc = 0) 
+    {
+        int t_c430c211306942eef9bc7385c0a793bcap = _c430c211306942eef9bc7385c0a793bca * _c430c211306942eef9bc7385c0a793bc54;
+        if (_c430c211306942eef9bc7385c0a793bcc != 0 && t_c430c211306942eef9bc7385c0a793bcap > _c430c211306942eef9bc7385c0a793bcc)
+        {
+            t_c430c211306942eef9bc7385c0a793bcap = t_c430c211306942eef9bc7385c0a793bcap / _c430c211306942eef9bc7385c0a793bcc;
+        }
+        else
+        {
+            t_c430c211306942eef9bc7385c0a793bcap -= _c430c211306942eef9bc7385c0a793bcc;
+        }
+
+        return _c430c211306942eef9bc7385c0a793bcm2(t_c430c211306942eef9bc7385c0a793bcap);
+    }
 }

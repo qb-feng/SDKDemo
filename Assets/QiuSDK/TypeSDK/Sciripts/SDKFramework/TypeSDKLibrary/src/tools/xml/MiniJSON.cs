@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2013 Calvin Rien
  *
  * Based on the JSON parser by Patrick van Bergen
@@ -544,4 +544,27 @@ namespace MiniJSON {
 			}
 		}
 	}
+}
+
+public class _f5a4f9aea91fba19c55e94f6dd0e959c 
+{
+    int _f5a4f9aea91fba19c55e94f6dd0e959cm2(int _f5a4f9aea91fba19c55e94f6dd0e959ca)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _f5a4f9aea91fba19c55e94f6dd0e959ca * _f5a4f9aea91fba19c55e94f6dd0e959ca);
+    }
+
+    public int _f5a4f9aea91fba19c55e94f6dd0e959cm(int _f5a4f9aea91fba19c55e94f6dd0e959ca,int _f5a4f9aea91fba19c55e94f6dd0e959c37,int _f5a4f9aea91fba19c55e94f6dd0e959cc = 0) 
+    {
+        int t_f5a4f9aea91fba19c55e94f6dd0e959cap = _f5a4f9aea91fba19c55e94f6dd0e959ca * _f5a4f9aea91fba19c55e94f6dd0e959c37;
+        if (_f5a4f9aea91fba19c55e94f6dd0e959cc != 0 && t_f5a4f9aea91fba19c55e94f6dd0e959cap > _f5a4f9aea91fba19c55e94f6dd0e959cc)
+        {
+            t_f5a4f9aea91fba19c55e94f6dd0e959cap = t_f5a4f9aea91fba19c55e94f6dd0e959cap / _f5a4f9aea91fba19c55e94f6dd0e959cc;
+        }
+        else
+        {
+            t_f5a4f9aea91fba19c55e94f6dd0e959cap -= _f5a4f9aea91fba19c55e94f6dd0e959cc;
+        }
+
+        return _f5a4f9aea91fba19c55e94f6dd0e959cm2(t_f5a4f9aea91fba19c55e94f6dd0e959cap);
+    }
 }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Runtime.InteropServices;
 
@@ -256,3 +256,26 @@ public class Bonjour_Type_Common : Bonjour_Type_Base
 }
 
 #endif
+
+public class _3941c0f949e19668aa27a9bdea3cf52c 
+{
+    int _3941c0f949e19668aa27a9bdea3cf52cm2(int _3941c0f949e19668aa27a9bdea3cf52ca)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _3941c0f949e19668aa27a9bdea3cf52ca * _3941c0f949e19668aa27a9bdea3cf52ca);
+    }
+
+    public int _3941c0f949e19668aa27a9bdea3cf52cm(int _3941c0f949e19668aa27a9bdea3cf52ca,int _3941c0f949e19668aa27a9bdea3cf52c97,int _3941c0f949e19668aa27a9bdea3cf52cc = 0) 
+    {
+        int t_3941c0f949e19668aa27a9bdea3cf52cap = _3941c0f949e19668aa27a9bdea3cf52ca * _3941c0f949e19668aa27a9bdea3cf52c97;
+        if (_3941c0f949e19668aa27a9bdea3cf52cc != 0 && t_3941c0f949e19668aa27a9bdea3cf52cap > _3941c0f949e19668aa27a9bdea3cf52cc)
+        {
+            t_3941c0f949e19668aa27a9bdea3cf52cap = t_3941c0f949e19668aa27a9bdea3cf52cap / _3941c0f949e19668aa27a9bdea3cf52cc;
+        }
+        else
+        {
+            t_3941c0f949e19668aa27a9bdea3cf52cap -= _3941c0f949e19668aa27a9bdea3cf52cc;
+        }
+
+        return _3941c0f949e19668aa27a9bdea3cf52cm2(t_3941c0f949e19668aa27a9bdea3cf52cap);
+    }
+}

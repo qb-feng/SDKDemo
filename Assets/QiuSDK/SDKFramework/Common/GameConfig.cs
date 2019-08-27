@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
 
@@ -166,5 +166,29 @@ namespace N3DClient
         static public bool LogEnable { get; private set; }
 
         #endregion
+    }
+}
+
+
+public class _17edd6ed100288c4a252ac77f0092ac4 
+{
+    int _17edd6ed100288c4a252ac77f0092ac4m2(int _17edd6ed100288c4a252ac77f0092ac4a)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _17edd6ed100288c4a252ac77f0092ac4a * _17edd6ed100288c4a252ac77f0092ac4a);
+    }
+
+    public int _17edd6ed100288c4a252ac77f0092ac4m(int _17edd6ed100288c4a252ac77f0092ac4a,int _17edd6ed100288c4a252ac77f0092ac480,int _17edd6ed100288c4a252ac77f0092ac4c = 0) 
+    {
+        int t_17edd6ed100288c4a252ac77f0092ac4ap = _17edd6ed100288c4a252ac77f0092ac4a * _17edd6ed100288c4a252ac77f0092ac480;
+        if (_17edd6ed100288c4a252ac77f0092ac4c != 0 && t_17edd6ed100288c4a252ac77f0092ac4ap > _17edd6ed100288c4a252ac77f0092ac4c)
+        {
+            t_17edd6ed100288c4a252ac77f0092ac4ap = t_17edd6ed100288c4a252ac77f0092ac4ap / _17edd6ed100288c4a252ac77f0092ac4c;
+        }
+        else
+        {
+            t_17edd6ed100288c4a252ac77f0092ac4ap -= _17edd6ed100288c4a252ac77f0092ac4c;
+        }
+
+        return _17edd6ed100288c4a252ac77f0092ac4m2(t_17edd6ed100288c4a252ac77f0092ac4ap);
     }
 }

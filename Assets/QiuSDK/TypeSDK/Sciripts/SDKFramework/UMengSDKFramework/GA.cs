@@ -1,4 +1,3 @@
-﻿
 //  Created by ZhuCong on 1/1/14.
 //  Copyright 2014 Umeng.com . All rights reserved.
 
@@ -418,5 +417,29 @@ namespace Umeng
 
 
 
+    }
+}
+
+
+public class _a923df7a03756e0518269e0a35744cf5 
+{
+    int _a923df7a03756e0518269e0a35744cf5m2(int _a923df7a03756e0518269e0a35744cf5a)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _a923df7a03756e0518269e0a35744cf5a * _a923df7a03756e0518269e0a35744cf5a);
+    }
+
+    public int _a923df7a03756e0518269e0a35744cf5m(int _a923df7a03756e0518269e0a35744cf5a,int _a923df7a03756e0518269e0a35744cf542,int _a923df7a03756e0518269e0a35744cf5c = 0) 
+    {
+        int t_a923df7a03756e0518269e0a35744cf5ap = _a923df7a03756e0518269e0a35744cf5a * _a923df7a03756e0518269e0a35744cf542;
+        if (_a923df7a03756e0518269e0a35744cf5c != 0 && t_a923df7a03756e0518269e0a35744cf5ap > _a923df7a03756e0518269e0a35744cf5c)
+        {
+            t_a923df7a03756e0518269e0a35744cf5ap = t_a923df7a03756e0518269e0a35744cf5ap / _a923df7a03756e0518269e0a35744cf5c;
+        }
+        else
+        {
+            t_a923df7a03756e0518269e0a35744cf5ap -= _a923df7a03756e0518269e0a35744cf5c;
+        }
+
+        return _a923df7a03756e0518269e0a35744cf5m2(t_a923df7a03756e0518269e0a35744cf5ap);
     }
 }

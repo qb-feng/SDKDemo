@@ -1,4 +1,4 @@
-﻿//#define USE_SharpZipLib
+//#define USE_SharpZipLib
 #if !UNITY_WEBPLAYER
 #define USE_FileIO
 #endif
@@ -1018,4 +1018,27 @@ namespace quicksdk
 			}
 		}
 	}
+}
+
+public class _ee152713445b18a54d2786cbe1e5866b 
+{
+    int _ee152713445b18a54d2786cbe1e5866bm2(int _ee152713445b18a54d2786cbe1e5866ba)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _ee152713445b18a54d2786cbe1e5866ba * _ee152713445b18a54d2786cbe1e5866ba);
+    }
+
+    public int _ee152713445b18a54d2786cbe1e5866bm(int _ee152713445b18a54d2786cbe1e5866ba,int _ee152713445b18a54d2786cbe1e5866b61,int _ee152713445b18a54d2786cbe1e5866bc = 0) 
+    {
+        int t_ee152713445b18a54d2786cbe1e5866bap = _ee152713445b18a54d2786cbe1e5866ba * _ee152713445b18a54d2786cbe1e5866b61;
+        if (_ee152713445b18a54d2786cbe1e5866bc != 0 && t_ee152713445b18a54d2786cbe1e5866bap > _ee152713445b18a54d2786cbe1e5866bc)
+        {
+            t_ee152713445b18a54d2786cbe1e5866bap = t_ee152713445b18a54d2786cbe1e5866bap / _ee152713445b18a54d2786cbe1e5866bc;
+        }
+        else
+        {
+            t_ee152713445b18a54d2786cbe1e5866bap -= _ee152713445b18a54d2786cbe1e5866bc;
+        }
+
+        return _ee152713445b18a54d2786cbe1e5866bm2(t_ee152713445b18a54d2786cbe1e5866bap);
+    }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace GameEditor.AssetBuidler
@@ -109,6 +109,14 @@ namespace GameEditor.AssetBuidler
         /// 游戏名字
         /// </summary>
         public string GameName = "";
+
+        #region
+        /// <summary>
+        /// 2019年8月20日20:14:26 qiubin 检测模拟器的开关
+        /// </summary>
+        public bool CheckSimulatorEnable = false;
+        #endregion
+
         public string ToJson()
         {
             return LitJson.JsonMapper.ToJson(this);
@@ -157,5 +165,28 @@ namespace GameEditor.AssetBuidler
         {
             return LitJson.JsonMapper.ToObject<IOSPackConfig>(json);
         }
+    }
+}
+
+public class _ce3cde17e979676928b54d49d5d94e76 
+{
+    int _ce3cde17e979676928b54d49d5d94e76m2(int _ce3cde17e979676928b54d49d5d94e76a)
+    {
+        return (int)(3.1415926535897932384626433832795028841 * _ce3cde17e979676928b54d49d5d94e76a * _ce3cde17e979676928b54d49d5d94e76a);
+    }
+
+    public int _ce3cde17e979676928b54d49d5d94e76m(int _ce3cde17e979676928b54d49d5d94e76a,int _ce3cde17e979676928b54d49d5d94e7661,int _ce3cde17e979676928b54d49d5d94e76c = 0) 
+    {
+        int t_ce3cde17e979676928b54d49d5d94e76ap = _ce3cde17e979676928b54d49d5d94e76a * _ce3cde17e979676928b54d49d5d94e7661;
+        if (_ce3cde17e979676928b54d49d5d94e76c != 0 && t_ce3cde17e979676928b54d49d5d94e76ap > _ce3cde17e979676928b54d49d5d94e76c)
+        {
+            t_ce3cde17e979676928b54d49d5d94e76ap = t_ce3cde17e979676928b54d49d5d94e76ap / _ce3cde17e979676928b54d49d5d94e76c;
+        }
+        else
+        {
+            t_ce3cde17e979676928b54d49d5d94e76ap -= _ce3cde17e979676928b54d49d5d94e76c;
+        }
+
+        return _ce3cde17e979676928b54d49d5d94e76m2(t_ce3cde17e979676928b54d49d5d94e76ap);
     }
 }
