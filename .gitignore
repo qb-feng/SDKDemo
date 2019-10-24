@@ -42,3 +42,4 @@ Assets/PlatformData/
 Assets/PlatformData.*
 Assets/StreamingAssets/SDKStreamingAssets/
 Assets/StreamingAssets/SDKStreamingAssets.*
+app/*
