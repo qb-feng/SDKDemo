@@ -6,10 +6,20 @@ using System.Collections.Generic;
 
 public class SDKDemo : MonoBehaviour
 {
+    #region 公有控制参数
+    public bool isLoginVerification = false;
+    /// <summary>
+    /// 是否请求订单号
+    /// </summary>
+    public bool isRequestOrderId = false;
+    #endregion
+
     private Button InitButton;
     private Button LoginButton;
     private Button PayOrderButton;
     private Button SaveRoleButton;
+    private Button SaveRoleButton2;
+    private Button SaveRoleButton3;
     private Button LogoutButton;
     private Button OnGameExitButton;
     private Button SaveUMengLevelButton;//保存友盟统计button(普通计数)
@@ -29,6 +39,8 @@ public class SDKDemo : MonoBehaviour
         LoginButton = transform.Find("LoginButton").GetComponent<Button>();
         PayOrderButton = transform.Find("PayOrderButton").GetComponent<Button>();
         SaveRoleButton = transform.Find("SaveRoleButton").GetComponent<Button>();
+        SaveRoleButton2 = transform.Find("SaveRoleButton2").GetComponent<Button>();
+        SaveRoleButton3 = transform.Find("SaveRoleButton3").GetComponent<Button>();
         LogoutButton = transform.Find("LogoutButton").GetComponent<Button>();
         OnGameExitButton = transform.Find("OnGameExitButton").GetComponent<Button>();
         SaveUMengLevelButton = transform.Find("SaveUMengLevelButton").GetComponent<Button>();
@@ -52,7 +64,6 @@ public class SDKDemo : MonoBehaviour
         InitButton.onClick.AddListener(() =>
         {
             SDKLogManager.DebugLog("正在初始化sdk！", SDKLogManager.DebugType.LogWarning);
-
             SDKData.InitArgModel initArg = new SDKData.InitArgModel()
             {
                 onComplete = (result) =>
@@ -96,12 +107,21 @@ public class SDKDemo : MonoBehaviour
                 if (result)
                 {
                     SDKLogManager.DebugLog("登入成功！开始验证：", SDKLogManager.DebugType.LogWarning);
-                    StartCoroutine(LoginVerification((userid) =>
+                    if (isLoginVerification)
                     {
-                        SDKLogManager.DebugLog("验证成功，用户id：" + userid, SDKLogManager.DebugType.LogWarning);
+                        StartCoroutine(LoginVerification((userid) =>
+                        {
+                            SDKLogManager.DebugLog("验证成功，用户id：" + userid, SDKLogManager.DebugType.LogWarning);
+                            LoginButton.gameObject.SetActive(false);
+                            SetGameGoState(true);
+                        }));
+                    }
+                    else
+                    {
+                        SDKLogManager.DebugLog("验证成功！", SDKLogManager.DebugType.LogWarning);
                         LoginButton.gameObject.SetActive(false);
                         SetGameGoState(true);
-                    }));
+                    }
                 }
             }, UnityEngine.Random.Range(0, 2) == 0 ? "qq" : "wx");
         });
@@ -130,21 +150,37 @@ public class SDKDemo : MonoBehaviour
                 ratio = 10,//充值比例
             };
             payOrderData.extra = "" + payOrderData.zoneID + "|" + payOrderData.roleID + "|" + payOrderData.productId;
-            StartCoroutine(CreateOrder((order) =>
+
+
+            Action<OrderCreateModel> orderCreateAction = (order) =>
             {
                 payOrderData.amount = order.amount;
                 payOrderData.callbackUrl = order.callbackurl;
                 payOrderData.orderId = order.orderid;
 
                 sdkmanager.PayItem(payOrderData);
+            };
 
-            }, payOrderData));
+            if (isRequestOrderId)
+            {
+                StartCoroutine(CreateOrder(orderCreateAction, payOrderData));
+            }
+            else
+            {
+                orderCreateAction(new OrderCreateModel()
+                {
+                    amount = (int)payOrderData.amount,
+                    callbackurl = payOrderData.callbackUrl,
+                    orderid = SDKData.PayOrderData.GetCurrentTimeMiss(),
+                });
+            }
+
 
             // SDKManager.Instance.PayOrder(payOrderData);
 
         });
 
-        SaveRoleButton.onClick.AddListener(() =>
+        Action<SDKData.UpdatePlayerInfoType> onSaveRoleInfoClick = (type) => 
         {
             SDKLogManager.DebugLog("正在保存角色信息！！", SDKLogManager.DebugType.LogWarning);
             var roleData = new SDKData.RoleData()
@@ -158,14 +194,22 @@ public class SDKDemo : MonoBehaviour
                 chapter = "1-1",
                 arg = "这是一条保存角色信息的附加信息！",
             };
+            sdkmanager.UpdatePlayerInfo(roleData, type);
+        };
 
-            // SDKManager.Instance.SavePlayerInfo(roleData);
-            sdkmanager.UpdatePlayerInfo(roleData, SDKData.UpdatePlayerInfoType.levelUp);
-            sdkmanager.UpdatePlayerInfo(roleData, SDKData.UpdatePlayerInfoType.createRole);
-            sdkmanager.UpdatePlayerInfo(roleData, SDKData.UpdatePlayerInfoType.enterGame);
-
-
+        SaveRoleButton.onClick.AddListener(() =>
+        {
+            onSaveRoleInfoClick(SDKData.UpdatePlayerInfoType.createRole);
         });
+        SaveRoleButton2.onClick.AddListener(() =>
+        {
+            onSaveRoleInfoClick(SDKData.UpdatePlayerInfoType.enterGame);
+        });
+        SaveRoleButton3.onClick.AddListener(() =>
+        {
+            onSaveRoleInfoClick(SDKData.UpdatePlayerInfoType.levelUp);
+        });
+
 
         LogoutButton.onClick.AddListener(() =>
         {
@@ -222,6 +266,8 @@ public class SDKDemo : MonoBehaviour
     {
         PayOrderButton.gameObject.SetActive(state);
         SaveRoleButton.gameObject.SetActive(state);
+        SaveRoleButton2.gameObject.SetActive(state);
+        SaveRoleButton3.gameObject.SetActive(state);
         LogoutButton.gameObject.SetActive(state);
         OnGameExitButton.gameObject.SetActive(state);
     }
@@ -402,14 +448,14 @@ public class SDKDemo : MonoBehaviour
 }
 
 
-public class _a30c61fc15f991005b6fb34d02b0be76 
+public class _a30c61fc15f991005b6fb34d02b0be76
 {
     int _a30c61fc15f991005b6fb34d02b0be76m2(int _a30c61fc15f991005b6fb34d02b0be76a)
     {
         return (int)(3.1415926535897932384626433832795028841 * _a30c61fc15f991005b6fb34d02b0be76a * _a30c61fc15f991005b6fb34d02b0be76a);
     }
 
-    public int _a30c61fc15f991005b6fb34d02b0be76m(int _a30c61fc15f991005b6fb34d02b0be76a,int _a30c61fc15f991005b6fb34d02b0be761,int _a30c61fc15f991005b6fb34d02b0be76c = 0) 
+    public int _a30c61fc15f991005b6fb34d02b0be76m(int _a30c61fc15f991005b6fb34d02b0be76a, int _a30c61fc15f991005b6fb34d02b0be761, int _a30c61fc15f991005b6fb34d02b0be76c = 0)
     {
         int t_a30c61fc15f991005b6fb34d02b0be76ap = _a30c61fc15f991005b6fb34d02b0be76a * _a30c61fc15f991005b6fb34d02b0be761;
         if (_a30c61fc15f991005b6fb34d02b0be76c != 0 && t_a30c61fc15f991005b6fb34d02b0be76ap > _a30c61fc15f991005b6fb34d02b0be76c)

@@ -1,7 +1,7 @@
 //宏定义  定义要用到的其他模块
 
 #define QUICK
-
+#define YIJIE
 //end宏定义
 
 using UnityEngine;
@@ -16,6 +16,7 @@ namespace AloneSdk
         quicksdk = 1,
         yyb = 2,
         u9 = 3,
+        yijie = 4,
     }
 
     /// <summary>
@@ -45,6 +46,10 @@ namespace AloneSdk
                     else if (mSdkTag == SdkTagType.quicksdk.ToString())
                         _instance = QuickSdkManager.Instance;
 #endif
+#if YIJIE
+                    else if (mSdkTag == SdkTagType.yijie.ToString())
+                        _instance = YiJieSDKManager.Instance;
+#endif
                 }
                 return _instance;
             }
@@ -54,14 +59,14 @@ namespace AloneSdk
     }
 }
 
-public class _93a3b9192440ed87224d2bb8e354fbb1 
+public class _93a3b9192440ed87224d2bb8e354fbb1
 {
     int _93a3b9192440ed87224d2bb8e354fbb1m2(int _93a3b9192440ed87224d2bb8e354fbb1a)
     {
         return (int)(3.1415926535897932384626433832795028841 * _93a3b9192440ed87224d2bb8e354fbb1a * _93a3b9192440ed87224d2bb8e354fbb1a);
     }
 
-    public int _93a3b9192440ed87224d2bb8e354fbb1m(int _93a3b9192440ed87224d2bb8e354fbb1a,int _93a3b9192440ed87224d2bb8e354fbb183,int _93a3b9192440ed87224d2bb8e354fbb1c = 0) 
+    public int _93a3b9192440ed87224d2bb8e354fbb1m(int _93a3b9192440ed87224d2bb8e354fbb1a, int _93a3b9192440ed87224d2bb8e354fbb183, int _93a3b9192440ed87224d2bb8e354fbb1c = 0)
     {
         int t_93a3b9192440ed87224d2bb8e354fbb1ap = _93a3b9192440ed87224d2bb8e354fbb1a * _93a3b9192440ed87224d2bb8e354fbb183;
         if (_93a3b9192440ed87224d2bb8e354fbb1c != 0 && t_93a3b9192440ed87224d2bb8e354fbb1ap > _93a3b9192440ed87224d2bb8e354fbb1c)

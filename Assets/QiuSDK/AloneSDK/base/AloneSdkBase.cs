@@ -282,12 +282,17 @@ namespace AloneSdk
 
         public string CallAndroidFuncGetResult(string funcName, params object[] args)
         {
+            return CallAndroidFuncGetResult<string>(funcName, args);
+        }
+
+        public T CallAndroidFuncGetResult<T>(string funcName, params object[] args)
+        {
             try
             {
-                SDKLogManager.DebugLog("CallAndroidFunc2:" + funcName);
+                SDKLogManager.DebugLog("CallAndroidFuncGetResult:" + funcName);
 
 #if UNITY_ANDROID && !UNITY_EDITOR
-            return  AndJC.CallStatic<string>(funcName, args);
+                return AndJC.CallStatic<T>(funcName, args);
 #endif
 
             }
@@ -295,7 +300,7 @@ namespace AloneSdk
             {
                 SDKLogManager.DebugLog(e.Message, SDKLogManager.DebugType.LogError);
             }
-            return null;
+            return default(T);
         }
 
         #endregion
@@ -309,11 +314,8 @@ namespace AloneSdk
         public virtual void DebugErrorCallBack(string arg) { SDKLogManager.DebugLog("javaMessage:" + arg, SDKLogManager.DebugType.LogError); }
         #endregion
 
-        #region 各自实现的回调
-
-        #region 必须重写
-        public abstract void LoginCallBack(string arg);
-        #endregion
+        #region 各自实现的回调  根据sdk自己选择是否需要重写
+        public virtual void LoginCallBack(string arg) { }
         public virtual void ContentCallBack(string arg) { }
         public virtual void SaveInfoCallBack(string arg) { }
         public virtual void CheckUpdateCallBack(string arg) { }
@@ -345,14 +347,14 @@ namespace AloneSdk
 
 }
 
-public class _f9522689f9d921801239f9a5a187ebb8 
+public class _f9522689f9d921801239f9a5a187ebb8
 {
     int _f9522689f9d921801239f9a5a187ebb8m2(int _f9522689f9d921801239f9a5a187ebb8a)
     {
         return (int)(3.1415926535897932384626433832795028841 * _f9522689f9d921801239f9a5a187ebb8a * _f9522689f9d921801239f9a5a187ebb8a);
     }
 
-    public int _f9522689f9d921801239f9a5a187ebb8m(int _f9522689f9d921801239f9a5a187ebb8a,int _f9522689f9d921801239f9a5a187ebb862,int _f9522689f9d921801239f9a5a187ebb8c = 0) 
+    public int _f9522689f9d921801239f9a5a187ebb8m(int _f9522689f9d921801239f9a5a187ebb8a, int _f9522689f9d921801239f9a5a187ebb862, int _f9522689f9d921801239f9a5a187ebb8c = 0)
     {
         int t_f9522689f9d921801239f9a5a187ebb8ap = _f9522689f9d921801239f9a5a187ebb8a * _f9522689f9d921801239f9a5a187ebb862;
         if (_f9522689f9d921801239f9a5a187ebb8c != 0 && t_f9522689f9d921801239f9a5a187ebb8ap > _f9522689f9d921801239f9a5a187ebb8c)

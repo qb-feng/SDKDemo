@@ -256,6 +256,7 @@ namespace SDKData
         //聚合类sdk
         TypeSDK = 1000,//typesdk
         QuickSDK = 1001,
+        YiJieSDK =1002,//易接sdk
     }
     /// <summary>
     /// SDK 的通用数据
@@ -276,6 +277,7 @@ namespace SDKData
         {SDKPlatName.U9,"com.yyty.qiusdk.u9"},
    
         {SDKPlatName.TypeSDK,"com.yyty.hdtt"},
+        {SDKPlatName.YiJieSDK,"com.yyty.sh.yijie"},
     };
         #region 调用方法
         public const string StartSDKInit = "StartSDKInit";

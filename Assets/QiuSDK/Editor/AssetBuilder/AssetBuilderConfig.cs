@@ -17,6 +17,7 @@ namespace GameEditor.AssetBuidler
         quicksdk,
         yyb,
         u9,
+        yijie,
     }
 
     public enum AppPackMode

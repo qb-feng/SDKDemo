@@ -1,0 +1,8 @@
+{
+	"AppVersion": 10000,
+	"mSdkTag": "yijie",
+	"GameName": "QSDK 易接",
+	"LogEnable": false,
+	"DitchID": "yijie",
+	"Splash": 1	
+}
